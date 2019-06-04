@@ -1,42 +1,83 @@
-var http = require('http')
-var fs = require('fs')
-var url = require('url')
-var port = process.argv[2]
+#! /usr/bin/env node
 
-if(!port){
-  console.log('请指定端口号好不啦？\nnode server.js 8888 这样不会吗？')
-  process.exit(1)
+var http = require("http"),
+    url = require("url"),
+    path = require("path"),
+    fs = require("fs");
+
+var domainName = getIPAdress(),
+    portCode = 443;
+
+/**
+ * 获取本机IP地址
+ * @method getIPAdress
+ * @return {string} IP字符串
+ */
+function getIPAdress() {
+    let result = "localhost";
+    var interfaces = require('os').networkInterfaces();
+    for (var devName in interfaces) {
+        var iface = interfaces[devName];
+        for (var i = 0; i < iface.length; i++) {
+            var alias = iface[i];
+            if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+                result = alias.address;
+            }
+        }
+    }
+    return result;
 }
 
-var server = http.createServer(function(request, response){
-  var parsedUrl = url.parse(request.url, true)
-  var pathWithQuery = request.url 
-  var queryString = ''
-  if(pathWithQuery.indexOf('?') >= 0){ queryString = pathWithQuery.substring(pathWithQuery.indexOf('?')) }
-  var path = parsedUrl.pathname
-  var query = parsedUrl.query
-  var method = request.method
+//创建服务
+http.createServer(function (req, res) {
+    var pathname = __dirname + url.parse(req.url).pathname;
 
-  /******** 从这里开始看，上面不要看 ************/
+    if (path.extname(pathname) == "") {
+        pathname += "/";
+    }
 
-  console.log('方方说：含查询字符串的路径\n' + pathWithQuery)
+    if (pathname.charAt(pathname.length - 1) == "/") {
+        pathname += "index.html";
+    }
 
-  if(path === '/'){
-    response.statusCode = 200
-    response.setHeader('Content-Type', 'text/html;charset=utf-8')
-    response.write('哈哈哈')
-    response.end()
-  }else{
-    response.statusCode = 404
-    response.setHeader('Content-Type', 'text/html;charset=utf-8')
-    response.write('呜呜呜')
-    response.end()
-  }
+    fs.exists(pathname, function (exists) {
+        if (exists) {
+            switch (path.extname(pathname)) {
+                case ".html":
+                    res.writeHead(200, {
+                        "Content-Type": "text/html"
+                    });
+                    break;
+                case ".js":
+                    res.writeHead(200, {
+                        "Content-Type": "text/javascript"
+                    });
+                    break;
+                case ".css":
+                    res.writeHead(200, {
+                        "Content-Type": "text/css"
+                    });
+                    break;
+                default:
+                    res.writeHead(200, {
+                        "Content-Type": "application/octet-stream"
+                    });
 
-  /******** 代码结束，下面不要看 ************/
-})
+            }
 
-server.listen(port)
-console.log('监听 ' + port + ' 成功\n请用在空中转体720度然后用电饭煲打开 http://localhost:' + port)
+            fs.readFile(pathname, function (err, data) {
+                res.end(data);
+            });
+        }else{
+            //404
+            res.writeHead(404, {
+                "Content-Type": "text/html;charset=UTF-8"
+            });
+            res.end("<div style='text-align:center'><img style='border-radius:100%' src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514523473427&di=77a8881c53af6c3d558b791a0d1ff3c1&imgtype=0&src=http%3A%2F%2Fi1.hdslb.com%2Fbfs%2Fface%2F69e50a1cdde2692b314966e35dd99acf970a9cb2.jpg'><h1>404</h1><p>网址不存在啊！哈哈！！</p></div>");
+        }
+    })
 
 
+}).listen(portCode, domainName);
+
+console.log("Server running at " + domainName + ":" + portCode + "/");
