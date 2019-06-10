@@ -1,12 +1,775 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
 </head>
+
 <body>
-    
+
+   面试：
+   1 有要求的必须会，尤其是框架
+   2 简历里说自己会的，必须经得起拷问【不是大概有印象！】
+   3 不要说自己是培训班的，要说是买视频看的
+   4 面试热点问题需要多看看，比如PROMISE自己生成
+
+
+   新人从安装工具开始！ 第一篇博客
+   chrome 浏览器（也可以firefox）
+   vscode 一个开发IDE （个人喜好）
+   可以写一些简单的代码，并在浏览器中调试。。。
+   -----------------------------------------------------
+   为了方便将代码放到互联网上，类似云盘的目的。
+   gitHub 代码托管 注册和创建仓库
+   gitBush git控制台 SSH生成 克隆项目到本地 以及 本地项目对接GITHUB远程仓库 gitignore使用 和其他基础命令行 以及VIM的使用
+   以上做完后，可以生成一个页面地址，便于在手机 PC等设备上查看。。。。
+   -----------------------------------------------------
+   什么是后端？服务器？
+   nodeJS 一个以javascript为脚本语言的虚拟机 做一个SERVICE脚本 创建服务。 同时说明 协议（HTTP TCP/IP FTP） 端口 域名 路径 参数 锚点的概念， 请求与响应的头部信息介绍包括MIME编码
+   以及请求类型等。
+   拥有自己的域名（不建议国内的，因为要备案） 然后与GITHUB进行挂钩。 说明DNS HOSTS 分布式服务器等含义
+   -----------------------------------------------------
+   以上是基础攻击安装。框架或其他类似小程序开发者工具在后续说明
+
+
+
+   第二篇 HTML
+   W3C 包括 MDN的网站查询
+   H5和HTML5的不同含义
+   HTML标签的语义 属性含义 以及常用的HTML标签介绍 DOCTYPE META LINK TITLE HTML HEAD BODY A P UL OL LI DIV SPAN 等等
+   开合标签的使用注意 表单HTML的介绍及使用
+   其他标签 EMBED OBJECT 的使用
+   HTML5 多媒体标签 CANVAS VIDEO RADIO IMG SVG
+   整个页面的呈现生命周期，从服务端响应并给浏览器下载内容开始。 并通过简单的HTML CSS和JS的位置放置不同来说明周期及加载优化的通用手段。
+
+
+   第三篇 CSS（新手篇）
+   css的能力 https://zhuanlan.zhihu.com/p/58424141
+   https://codepen.io/noahblon/pen/ZbjmbK
+   https://zhuanlan.zhihu.com/p/65659541
+   盒模型的概念
+   改变盒模型的布局样式FLOAT(清除浮动) DISPLAY（inline block inline-block flex） POSITION （FIXED ABSOLUTE）INLINE-HEIGHT
+   CSS选择器
+   常用样式 BACKGROUND COLOR FONT-SIZE calc的使用 等等 垂直居中 水平居中等
+   CSS的提升性能的常用手段 雪碧图（在线制作） 文件合并和压缩（只先说明过去用的工具或后端完成）
+   注释及命名规范
+
+   第四篇 JS（新手篇）
+   ECMA的历史简述
+   从ES5开始说起 主要说ES6， 包括变量类型（数组 字符串操作） CLASS 朗姆达表达式
+   闭包 作用域 原型链 面向对象的概念 APPLY CALL的使用
+   排序算法
+   DOM操作
+   JSON
+   AJAX
+
+
+   第四篇 CSS 进阶
+   什么是设备适配，什么是平台兼容？
+   适配：设备像素 设备独立像素 与 CSS像素的关系，手段：VIEWPORT设置法 媒体查询法 SASS预加载计算百分法
+   兼容：盒模型的概念及不同浏览器对盒模型的解析呈现， IE9-的注释切换法 HACK法
+   FONT-FAMILY ICON-FONT的使用
+   CSS的动态加载的弊端
+   CSS的代码冗余 与CSS开发管理手段及前端压缩合并方案 SASS/LESS的使用
+   新型的CSS
+
+   第五篇 CSS绘图与动画篇
+   BORDER的多用途
+   SVG中的CSS使用
+   CSS 2D 与 3D绘制
+   其他动画CSS控制，包括LOADING效果 翻页过渡 点击交互 HOVER交互等
+   与JS配合绘制一个简单的柱状图
+
+   第六篇 JS与CANVAS 数据可视化
+   CANVAS绘制JS接口API介绍
+   动手题：
+
+
+   学习的观念：
+   <ul>
+      <li>不要忽视自以为明白的知识点，否则基础知识可能依然徘徊在学习之前，那就失去了学习的意义。</li>
+      <li>一定要写博客，巩固知识，且便于自我翻阅</li>
+      <li>选用好的趁手的IDE，不要太关注打开时间的长短！</li>
+      <li>2019年至少要掌握的技术: VUE/REACT，基础【原生JS，算法/数据结构，WEBPACK】。额外掌握的技术 REACT-NATIVE ECHART TREE.JS Flutter 小程序 白鹭等</li>
+      <li>代码勤写注释，/** Create by somebody on sometime 文件创建注释</li>
+   </ul>
+
+
+
+   编程基础 帮助你在瓶颈期进行深度钻研
+   1 硬件和软件的合作： 计算机的运行原理 《编码》 只需要了解基本概念
+   2 最大的软件：操作系统 C++写系统的可以学 《|维基百科》
+   3 自己写软件：数据结构和算法 《数据结构与算法分析》 简单的话可以主攻各种排序算法！
+   4 多人写软件：软件工程 《代码大全》 工作流程的安排
+
+   原理课（内存）
+
+
+   内存存储方式 横纵来看
+   A. 纵向8个单元选择
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   B.横向对需要变1的充电
+   --1
+   0
+   0
+   --1
+   --1
+   0
+   --1
+   0
+   C.读取时就是判断每个纵向的晶元的电量 大于50%为1 或小于50%为0
+   D.由于无法长期保留电，所以需要内存不断充电保持状态，也就叫刷新。这个刷新快慢叫HZ频率
+
+
+   原理课（数学进制）
+   10进制转2进制计算方法：
+   n(10) = n1 * 10^i + n2 * 10^i + ... nn * 10^i 这就是10进制
+   二进制也就是
+   n(2) = n1 * 2^i + n2 * 2^i + ... nn * 2^i 进制数就是分解为进制方
+
+   比如 78
+   1 分解79为几个可完整开平方的数，且由最近值排序 64（2^6） + 8（2^3） + 4（2^2） + 2 （2^1）+ 1（2^0）
+   1*（2^6） + 1*（2^3） + 1*（2^2） + 1*（2^1） + 1*（2^0）
+   1 0 0 1 1 1 1
+   这个理解为 每一个次方为一位，如果空掉的就为0，比如这里没有2的4次方和5次方
+
+   负数使用补码来存，类似留一位来代表正负
+
+   小数的换算二进制是
+   n(10) = n1 * 1/10^i + n2 * 1/10^i + ... nn * 1/10^i 指数位与整数的区别在于，小数指数位是越来越大，而整数是越来越小
+   二进制则是1/2的次方
+
+   JS的数学精度，浮点数与最大最小数问题，可以去看相应资料。
+
+   16位于2位的换算。
+   16位的起源在于 4个字节的范围是0-15 比如1111 就是15。 所以0011 0001的八位二进制可以很容易的用16位来换算：
+   二进制的加法是 8（2^3） 4（2^2） 2（2^1） 1（2^0） 每一位都是2的次方叠加。 结果就是0011（1+2） 0001（1）是 31
+
+
+
+   学什么程度：简历包含两个框架项目，两个JS原生项目，2个小创意项目
+
+
+
+   第一节课
+   简单的HTML CSS JS的几行代码，帮助新人提高兴趣. html的lang 用 zh-Hans
+   标签快捷写法 EMMET语法： div+tab or dir+.classname+tab or div.content>ul>li*10.item
+   div.box>ul>li.item*10>a[href="https://www.list.com/page$.html"] 这个很牛逼了
+
+   域名购买
+   ayankey 简单登录账户 https://www.namesilo.com/
+
+   记住几个GIT命令，以及直接在GIT下面的文件操作命令 和NODE操作命令
+   比如：
+   GIT BUSH下
+   进入D根目录 cd d:
+   创建文件夹 mkdir demo
+   查看文件夹是否存在 ll or ls
+   进入文件夹 cd demo
+   创建文件 touch test.html
+   vim打开文件并进行编辑 vi test.html
+   快捷键 i 开始插入编写， 快捷键esc 输入退出（:quit）或保存(:write)命令 或者:qw
+   node 运行这个页面 node test.html
+   也可以进入node环境 输入 node，如果退出 ^d 中断是^c
+   curl -L 网站地址 可以看到网页源代码
+   curl -L 网站地址 可以看到网页源代码 > test.html 打开并保存到某个文件
+   删除文件夹 cd .. ; rm -rf demo
+
+   GIT讲解就必须删除 ssh注册的东西，否则无法讲，对于我们的用途在于如果我们用了别人的机器，可以删除他们的SSH注册信息
+   rm ~/.ssh/id_rsa.pub
+   rm ~/.ssh/id_rsa
+   rm ~/.ssh/known_hosts
+
+   如果使用GIT SSH的话，必须要设置一些全局内容，主要是前两个，名字可以随便取，只是方便远程仓库记录合作者的名字和联系方法
+   git config --global user.name xxxxxx (把xxxxxx替换成你的英文名字随便什么都行)
+   git config --global user.email yyyyyy (把yyyyyy替换成你的邮箱跟github一致或者不一致也行)
+   git config --global push.default simple
+   git config --global core.quotepath false
+   git config --global core.editor "vim" (使用vim编辑提交信息）
+
+   然后在推送时会要求SSH KEY，这是为了防止无关人员随意推送项目代码 而设置给可用仓库的钥匙
+   step：命令生成
+   ssh-keygen -t rsa -b 4096 -C "eddie_key@163.com" 邮箱可以随意，它是为了其他人需要联系你用的，然后输入三次回车。
+
+   step：显示生成的KEY字符串，然后复制出来，黏贴到GIT仓库的SSH中
+   cat ~/.ssh/id_rsa.pub
+   完成
+
+   如果要做个GIT在线博客的话，可以生成GIT地址：
+   具体方法是在仓库页面中找到setting点击进入，找到gitHub pages分类 source点选master branch然后就可以有地址了，加上HTML页面名即可打开。
+   如果MD文件的话，直接点击仓库中的文件上面就有地址。 也可以把地址房贷代码页面中的编辑表述保存，方便用户打开
+
+
+   js.jirengu.com 代码片段检查好用，国外的是JSBIN.COM
+   http://bootcdn.cn 可以应用js.jirengu.com 没有的库地址。
+
+
+   ----------------------------------
+   第二课 专项巩固命令行
+   常用命令行必须记住一些！
+   LINUX WINDOWS GIT BUASH等
+   GULP WEBPACK SASS NODE.JS VUE REACT ANGULAR都没有图形界面，只能靠命令行
+
+
+   当前用户目录【IOS系统】 ~
+   LINUX 这些没有盘符，所以用 /
+   当前目录.
+   父目录..
+   提示可输入命令的前缀 $
+
+   背单词：
+   directory dir
+   file
+   make directory mkr
+   remove rm
+   move mv
+   copy cp
+   list ls
+   link
+   find
+   echo 回声
+   touch
+   change directory cd
+
+   缩写就是去除元音字母
+   命令行：
+   cd ~/Desktop
+   clear 清屏
+   mkr demo-1 创建目录 mkdir -p 目录路径1/目录路径2/... 多目录创建 如果目录路径存在空格这种特殊字符的话，就用引号包裹起来
+   rm -rf demo-1 -r递归进入所有目录删除 -f关闭每次确认删除的提示
+   touch 1.txt 创建文件
+   mv 1.txt 2.txt 1.txt移动为2.txt 重命名也是这么做
+   pwd 当前路径显示
+   whoami 我是谁
+   ls 查看路径 -a 显示所有【包括点开头的隐藏目录】 -l【显示更多的信息】 -al【前两者合并】
+   这里要说一下全信息的含义
+   drwxr-xr-x 2 eddie staff 68 9 29 16:45 2
+   -rw-r--r-- 1 eddie staff 0 9 29 16:50 eddie
+
+   d开头说明是目录 r可读 w可写 x可执行 这三个为管理员权限 r-x组权限 后面一个r-x是用户权限
+   -开头说明是文件
+
+
+   echo '1' > 文件路径+文件名 创建文件并录入1
+   echo '1' >! 文件路径+文件名 强制覆盖文件及内容1
+   echo '1' >> 文件路径+文件名 追加文件内容创建文件并录入1
+
+   touch 文件名 创建文件
+
+   cp 源路径 目标路径 复制文件
+   cp -r 源路径 目标路径 复制目录
+
+   mv 源路径 目标路径 移动节点
+
+   rm 文件路径 删除文件
+   rm -f 文件路径 强制删除文件，也就是不询问
+   rm -r 目录路径 删除目录【递归进入目录进行子孙的优先删除，否则目录无法直接用rm删除】
+   rm -rf 目录路径 强制删除目录
+
+   vi ~/.bashrc | .npmrc vim编辑器打开 bash配置文件 npm配置文件
+
+   man rm linux（ubunto）
+   tree linux（ubunto）
+   ln -s linux（ubunto）
+
+   curl -L 网址
+   curl -L 网址 > 文件路径 可以下载某个网址的文件
+
+   wget -p -H -e robots=off 网址 获取网站全内容
+
+   df -kh 磁盘占用
+   du -sh 当前目录总大小
+   du -h 当前目录文件个大小
+
+   cat 文件路径 显示文件内容
+
+   history 之前操作命令的历史显示
+   https://explainshell.com/ 命令解释网站
+
+
+
+
+   NODE好工具
+   npm install -g fanyi 然后 fanyi + 单词 就可以翻译了
+   npm install -g tldr 简要说明 tldr = too long didn`t read
+   npm install -g http-server 代替自己写service.js 进入对应目录下输入 http-server -c -1 不用缓存
+
+
+   git:
+   每个电脑对应一把钥匙，所以先SSH创建。
+   自己的GIT BUSH中命令：ssh-keygen -t rsa -b 4096 -C "邮箱地址"
+   ~/.ssh/ 下生成了两个文件 id_rsa & id_rsa.pub
+   cat ~/.ssh/id_rsa.pub 仍然会复制到GIT上
+   删除现有~/.ssh/known_hosts ： rm -f ~/.ssh/known_host
+   重新连接SSH到git并会自动更新known_hosts： ssh -T git@github.com
+
+   设置GIT的5个值 就是之前的用户名 邮箱等命令
+   git log 项目操作记录
+   git status -sb -s是summary -b就是显示分支 branch 简化输入为gst
+
+   本地仓库与远程仓库链接起来
+   git remote add origin git@github.com:远程仓库的作者名/仓库名.git
+   如果上一个命令打错了可以：git remote set-url origin git@github.com:远程仓库的作者名/仓库名.git
+   git push -u origin master
+   注意：如果本地仓库链接远程仓库，远程仓库必须是一个空的仓库，在创建时除了名字外 都不要进行设置。
+   注意：先PULL在PUSH，有时要在VIM修改冲突
+
+   如果直接获取远程仓库，MIT协议【麻省理工大学实验室】吧 增加node忽略 以及初始化创建README
+   git clone SSH地址
+
+   其他命令
+   git branch 新建分支
+   git merge 合并分支
+   git stash
+   git stash pop
+   git revert 回撤
+   git reset
+   git diff 查看变化
+
+   git bush命令修改
+   理由 ~/.bashrc 文件的优先执行配置，并在里面输入 alias 指令名="指令" 比如 alias showall="ll" 这样输入showall时会执行ll命令
+   还能再里面设置环境变量 export
+   以及设置PATH: export PATH="目录绝对路径:$PATH"
+
+   第三课
+   脚本：
+   chmod -x 文件名 IOS系统下可用赋予执行权限
+   shebang
+   .zshrc
+   type 命令 可以查看命令路径
+   which 命令 查找最终结果
+   .sh 文件为脚本运行文件，可以 sh 文件名.sh 执行 内容包括创建文件等。如果要在执行文件时把内容代入脚本可以在脚本中 $n 来定位比如：
+   > sh command.sh box
+   在command.sh中
+   mkdir $1 这里的意思就是把box这个第一个参数放入脚本中创建
+   BASH脚本的判断
+   if [ -d "./xxx" ]; then
+   echo 1
+   else
+   echo 2
+   fi
+   -d 是文件夹判断 fi结尾 空格都不能少
+
+   exit 0 没有错误返回 exit 1 错误有
+   > sh command.sh box && echo "success"
+   这个命令中 &&判断前一句中的脚本是否返回0 也就是exit 0 没有问题就执行后面成功
+
+
+
+   node环境命令 , 一般文件目录用 file system类完成
+   process.cwd() == pwd
+   process.chdir("文件夹路径") == cd
+   console.log() == echo
+   fs.mkdirSync() == mkdir
+   fs.writeFileSync() == touch
+   fs.chmod() == chmod
+   fs.copyFile() == cp
+   ^d 推出环境
+
+   一个自动创建文件夹和文件 以及内容的脚本
+
+   #!/usr/bin/env node //外部命令可以不用书写node前缀命令
+
+   var fs = require('fs')
+
+   var dirName = process.argv[2] // 你传的参数是从第 2 个开始的
+
+   fs.mkdirSync("./" + dirName) // mkdir $1
+   process.chdir("./" + dirName) // cd $1
+   fs.mkdirSync('css') // mkdir css
+   fs.mkdirSync('js') // mkdir js
+
+   fs.writeFileSync("./index.html", "")
+   fs.writeFileSync("css/style.css", "")
+   fs.writeFileSync("./js/main.js", "")
+
+   process.exit(0)
+
+   shebang：简化环境前缀命令
+   #!/usr/bin/env node
+
+
+   第四课
+   最早的好用通信应用属邮件系统！ 1965年，1971年开始使用@符号表示邮箱地址
+   FTP下载文件 对方给FTP地址，我们装个FTP软件
+   HTTP 80-90年代 出现并胜过其他上午解决方案
+   HTML 邮件内容过于普通，所以需要更多格式的超文本方案，一开始只有11个标签
+   （markdown的由来是总结所有人的格式习惯，所以出现了同样的效果有很多种写法的原因）
+   WWW 万维网 1989-1992 tim berners-lee 创建 world wide web的概念，起因则是把破碎的设备端整合在一起，算是最早的跨设备理念 2017获得了图灵奖
+   万维网包含三个概念技术
+   URI （统一资源标识符）网址 通信路标
+   HTTP 协议 通信方式
+   HTML 超文本 通信内容 本来主要为了跳转用的！
+   URL的作用是让你可以访问页面，也就是网址
+
+   为了这三个概念可以实施，LEE还做出了第一个 服务器 浏览器和内容网页
+   世界上第一个网页地址 http://info.cern.ch/
+
+   DNS Domain Name System
+   HTTP HyperText Transfer Protocol
+   HTML HyperText Markup Language
+   TCP 传输控制协议（Transmission Control Protocol
+
+   URI：统一资源标识符
+   URI 分为 URL统一资源定位符【唯一性定位】 和 URN统一资源名称【唯一性名称】
+   URN 是名称唯一性 如商品都有唯一的条形码，但无法直接定位 不利于查找
+   URL Uniform Resource Locator 可以定位查找，但不一定可以直接定位到某个商品。 论查找更为方便。所以现在一般都用URL
+   URL = 协议+域名+（路径+参数+锚点） 锚点为ID=1的元素
+   .com 顶级域名 baidu 二级域名（沟通时多说其为一级域名） www 三级域名（沟通为二级域名）
+
+
+   DNS：domain name system 域名系统或叫 DNS解析（服务器）
+   输入域名 还一个 IP
+   互联网认IP 不认域名， 但人容易人域名 不容易记IP。 所以需要DNS来进行查询并转换
+   当然，一个域名可以对应很多个IP，尤其在分布式服务器系统里，需要给最近的用户分配服务器 增加体验速度。
+   命令查询：nslookup 域名。 上一个是DNS查询服务器【可能是本地或本地路由】，后一个是百度的IP
+   hosts 可以绕过DNS 任意指定域名对应的IP，一般在内网测试时用
+
+
+   SERVER + CLIENT +HTTP
+   服务器电脑 + 客户端电脑 + HTTP
+   端口号：一个电脑同时只能有一个对应IP，但有时需要不同的服务比如HTTP 代理服务 数据库服务 FTP等，所以要多端口配置
+   请求【域名输入】- 转成IP【DNS解析】- 连接对应IP服务器【一般为80端口，客户端会包括自己的一些信息给服务器】- 响应【与发送请求的浏览器进行发送和接受内容】
+   HTTP协议包括错误请求的一些页面比如400 502
+
+   CURL命令 发请求 并得到相应
+   curl -s -v -H "Frank: xx" -- "https://www.baidu.com"
+   请求：
+   GET / HTTP /1.1 获取根目录 HTTP1.1协议
+   HOST:WWW.BAIDU.COM
+   USER-AGENT:CURL/ 7.54.0 用什么工具发起的请求
+   ACCEPT: */* 接受任何内容
+   FRANK:XX
+
+   curl -X POST ... 这个就会成为POST请求
+   请求：在第一行的GET 变为 POST
+
+   不同的请求，响应结果是不同的
+
+
+   curl -X POST -d "数据内容" ... 这个是包括上传本地内容
+   请求：多了三行内容w
+   Content-length:8 数据内容长度
+   Content-Type: application/x-www-form-urlencoded 上传数据的类型
+   * upload completely sent off: 8 out of 10 bytes 完整请求上传内容大小
+
+   请求类型：
+   GET 获取
+   POST 上传
+   PUT 整体更新
+   PATCH 部分更新
+   DELETE 删除
+   HEAD
+   OPTIONS
+   等
+
+   HTTP必须接受以"/"开头的路径
+   整个请求的格式是
+   1 请求类型 + 路径 +协议/版本 【这里的路径包括了URL参数 但不包括锚点 在GET时有用】
+   2 各类 KEY:VALUE数据
+   3 回车空行分割
+   4 要上传的数据 FWormData
+
+
+   LUNUX系统设置HOST > sudo vi /etc/hosts
+   Content-Type: application/x-www-form-urlencoded
+   x- 是代表没有被写入规范的格式
+   www- 万维网
+   form- 表单
+   用url encoded 压缩一下【用于中文】
+
+
+   https 数据传输都是加密的 而http都是明文，比如路由器如果可以记录就会被盗取
+
+
+   响应
+   第一部分：HTTP/1.1 200 OK 协议/版本号 状态码 状态解释
+   第二部分：KEY/VALUE
+   content-Length: 2443 返回的内容大小
+   content-Type: text/html 返回的格式类型 【MIME规范】
+   Server： bft/1.0.8.18 百度外部【前端】服务器，是百度随意加的，便于调试
+   ...
+   第三部分：回车分割
+   第四部分：HTML文本内容
+
+   状态码
+   1**
+   2** 成功 GET：200一般成功 POST: 204创建成功
+   3** 转向 301：资源永久搬走【有location地址会重定向】 302：资源暂时搬走 【有location地址重定向】 304：资源一致【会使用浏览器缓存】
+   4** 客户端错误 404
+   5** 服务器错误
+
+
+   20190603直播课：
+   阿里 P5 P6 P7 P8(10年)
+   P5 大三下叫应届生【参加校园招聘】 9月秋招都是牛逼大学 3月春招【但一般进不去】 或研究生二
+   P6 社招 至少2年工作经验【高含金量】 通过面试【4面】 同事面 + 主管面 + 总监面|交叉面 + HR面
+   P7 - P8 强大的佐证 比如在腾讯做到T3.1
+
+   能力
+   热情
+   思维模式 WHY产品 HOW技术+产品 WHAT技术主管 DO技术开发
+
+   P5 3 - 4 -5月 可以放开应届生入口， 也就是那时候天天刷这个网页，【内推学弟早两周 可以免笔试】
+   《计算机应用基础 或 软考》 + 方向指示【web前端或后端知识】
+   霸面的机会 也就是在笔试失败后，强行参加面试的人。
+   基础的不同知识，比如TCP 排序 数据结构 或 webpack ES6 promise VUE/REACT
+   流行的知识 函数式 柯里化 高级函数
+   需要经常玩GITHUB
+   现在流行TS FLUTTER
+   总监面：潜力 【反应敏捷】 规定时间内直接问之前的你的问题有什么问题，再找什么问题。
+
+   P6 2年+ 没有黑名单但有历史记录，记录不会分享。去大公司走一圈 然后再投心仪的公司
+   学历 +项目
+   985 211学历 + 特效【体验】 性能【高并发】
+   电话面试：24小时开机 30-60分钟的题目 每天刷全网的面经或押题
+   同事面：技术面
+   LEADER：职业素养，体现责任心 社交 用户第一 复盘和总结【流程问题 REVIEW机制 单元测试？跨组沟通？】
+
+   规划学习路线：
+   硬（代码）：
+   基础---（博客）比如CSS垂直居中 VUE响应式原理 REACT HOOK的使用等
+   流行---（GITHUB/知乎 关注大佬）或跟踪阮一峰
+
+   软（扯）：
+
+   另外就是不能去外包，然后就是业务相似，技术相似 就很好了。
+
+
+
+   腾讯 【T1.3 T2.1】 【T2.2 -T2.3】 【3.1】 【 3.2】
+
+
+   -----------------第五课
+   代码有了 但怎么传？ 是否需要发起方和收录方共同规定一个方案才行呢？ 这时候就出现了协议，也就是HTTP协议
+   而HTTP协议是上层协议，其基础是基于TCP/IP两个协议参与的。TCP： transmission control protocol 传输控制协议 IP： internet protocol 网络协议
+   TCP有三次握手 客户端到服务端请求连接 服务端返回连接准备就绪 客户端开始连接服务器 后续走起
+   TCP与UDP区别 TCP可靠【结果可控可观察】 面向连接【连接概念】 但较慢
+
+   可以认为协议就是一种工人的方式
+   HTTP如何写内容的协议
+   IP如何联网的协议
+   TCP如何传输的协议
+
+   IP分内网IP 192.168.*.* 和外网IP ，如果有路由器就会分配一个外网IP，但往往IP一般是随机给的，如果要租用一个固定的外网IP就需要花钱，一般只有
+   需要保持网站稳定的企业才需要花这个钱。
+   内网不能访问外网，必须通过路由器中转。外网可以互相访问，但不能访问内网。必须通过路由器
+   所谓路由 就是 必由之路，路由器有指路的意思，内容的分发。 所以路由器也可以叫网关，也就是在路由器层面进行控制的。
+   强记：
+   本地IP 127.0.01 就是访问自己，也就是局域网无论谁访问它，都是设备自己。HOSTS里面用 LOCALHOST 对应这个本地IP
+   0.0.0.0 不表示任何设备
+
+
+   port 端口 HTTP服务 FTP服务 SMTP服务
+   66535 个端口 0-1023是系统使用 管理员才能调整使用
+
+
+   多端口就是方便一个窗口 对待特定的一种服务。
+   80 HTTP
+   443 HTTPS
+   21 FTP
+
+   服务器：
+   硬件：有网 没有显示卡和显示器 CPU 和 RAM要高，远程操作
+   软件：BASH也可以， NODEJS 也可以 JAVA啥的都可以。
+
+   如果页面出现乱码，多半就是没有设置字符集charset=
+   也就是在 content-type: "text/html;charset=utf-8" 文件返回就不用些，必须保证本地资源的字符集格式同于这个设置。utf-8是一般服务器字符，所以直接返回字符串都用utf-8
+
+
+   ---------------------------
+   第六课
+   工作和学习的任何一个东西必须为简历服务。
+   简历：
+   外观
+   内容（重要）
+
+   GITHUB每天坚持上传 开源代码
+   每天写博客
+   外文翻译
+   他人评价
+   自拍
+   对要面试的公司业务的分析 包括业务产品层面的 和 技术架构实现层面的
+
+
+   无需注册的国外域名注册 namesilo.com
+
+
+   李爵士在离开英国核子研究所后创立了W3C组织
+   HTML 4.01
+   XHTML XML+HTML 所有标签必须闭合
+   HTML5 重点学
+   HTML 5.1
+   H5能运行在微信上的网页，叫H5
+   规范稳定 specifications
+   pseudo - class 伪类
+
+   文档类型
+   DOCTYPE
+   看网址 www.w3.org/qa/2002/04/valid-dtd-list.html
+   也可以看 https://developer.mozilla.org/zh-CN/
+
+   网页合理化验证器
+   validator.w3.org/unicorn [但是被QIANG了]
+
+   p标签 paragraph段落
+   ul un-ordered list 无序列表
+   ol ordered list 有序列表
+   li list item
+   div divide 段落划分
+   span 横向划分
+   kbd keyboard
+   strong 和 b的区别 就是在于前者带有语气含义，所以前者多用于文章 后者用于文档格式
+   em 或 I 语气着重
+
+   HTML是没有块级元素和内联元素的区别的，只有对CSS有用。 HTML不管样式
+
+   anchor 锚 a标签
+   navigation 导航
+
+   body默认margin 8
+
+   配置GITHUB地址 与 域名连接。
+   1 进入GITHUB 仓库里面的setting git page下面 点击学习更多，会出现4个IP，然后依次加到域名网站
+   2 域名的网站配置IP，至少留一个空格或@的一级域名 至少加个WWW的一级域名
+   3 加完域名后，在GIT PAGE里面 选择 MASETER 下面键入域名 如果没有报错信息就完成了。 打开页面时需要等一下才能有效果，但如果用另外一方的DNS解析就需要等1-2天了
+
+
+   写一个RESUME 最好是响应式的
+   写一个博客
+   W3C 简介（查维基百科）
+   MDN 简介（查维基百科）
+   HTML 所有标签列表（查 MDN）
+   什么是空标签（查 MDN、博客） 无内容 或不能作为存放内容的标签
+   什么是可替换标签（查 MDN、博客） 也叫作由加载内容决定标签显示的哪一类，比如IMG VIDEO CANVAS都必须有加载的内容决定
+
+
+   续~
+   contenteditable DIV中可以进行内容输入
+   required 表单必须填充
+   alt
+   target
+   name
+   id
+   rel
+   HTML布局和包裹的方法： 服务于单一的横向与纵向布局，所以如果布局存在复杂布局的情况下，
+   GRID布局可以使用复杂布局法，不需要太多DIV包裹了。
+
+   表单标签
+   iframe 已经很少用了！ 属于可替换标签， 默认100*50 让a标签点击 刷新iframe
+   <iframe src="#" frameborder="0" name="baga"></iframe>
+   <a href="http://qq.com" download>下载</a>
+   a GET请求发起。 其target属性包括了 _blank新窗口 _self自己（默认） _parent（父窗口）用于IFRAME中 _top顶层窗口（用于多级嵌套） 或者iframe的name
+   决定超链接是否打开或是下载，关键在于资源的content-type：application/octet-stream 就是下载
+   HREF的几种写法
+   1 带协议绝对路径
+   2 相对路径
+   3 "//"带双杠的无协议路径（继承当前协议）但必须当前页面的协议与要跳转页面的协议一致
+   4 锚点 # 不会重新发请求
+   5 URL参数 ?name=aaa 会重新发请求
+   6 伪协议 "javascript:;" 早期的一种写法，最重要的结果就是可以让A标签在有手势指针的情况下，点击无效。
+   <a href="/..">link</a> 本地根目录
+   比起空的href（依然会请求） 加个#的href（会把页面滚动到顶上） 以及不写href（失去手势指针）的用途好，
+   我建议不写href，并用CSS的CURSOR来解决
+
+   form 一般用于POST请求,内部包括一些其他表单元素【请求的FORM DATA部分（HTTP协议下依然是明文的 容易被网络监听）】input的type TEXT PASSPORT等
+   <form action="aaa.html" method="POST">
+      <input type="text" name="iname"> iname是formdata中的KEY
+      <input type="submit" value="submit0">
+   </form>
+
+   form的content-type是 application/x-www-form-urlencoded 其规定了英文以外的字符包括中文会转义为utf-8编码,也就是UNICODE分字节 并在每16进制字节出以%分割
+   （测试POST请求，必须建立一个服务，否则file:协议是不支持POST使用的）
+   form的method只有支持get和post 两种类型。大小写支持。 如果是GET的话，表单内容会放在query String查询参数中进行请求
+   另外，form也有taget 与a标签行为一致
+   注意：如果form的button标签如果不定义其type 则会自动成为submit按钮
+
+   input 的type
+   checkbox id + label for 中文关联触发checkbox，当然输入框也可以用label。 当然也可以用 label包裹表单
+   checkbox的name是给与参数集合的KEY名，如果选中的话，默认为on，当然也可以自定义并修改在value中
+   radio 的其他同上，需要注意的是排他性，所以一组内的单项必须给出同样的 name
+   select name + option value 不能选的+disabled属性 默认选的+selected属性 如果要多选在select上+multiple
+   textarea 固定大小 style="resize:none"
+
+   table 合并border style border-collapse：collapse
+   caption表格标题
+   colgroup col 设定列宽 在这里可以设置类名
+   thead tr th
+   tbody tr th(左侧表头) td
+   tfoot
+   tr
+   td
+   tfoot thead tbody 顺序可以随便写，但最终还是不会变
+   -----------------------------------------------------
+   20190605直播 移动端
+   像素：
+   设备像素：物理像素 单元物理像素由三个原色点组成
+   设备独立像素：（系统可设置） 对显示大小有关。screen.width是查找这个的尺寸。 一个设备独立像素可能包含1个或多个物理像素点。
+   像素分辨率 ==物理像素点 设备像素
+   PPI： 每英寸（对角线）的物理像素数，
+   ppi = Math.sqrt(1125^2 + 2436^2) /5.8 463ppi 越高越好
+   CSS像素 精确度量网页内容 缩放100%的情况下 1px = 1个设备独立像素
+   如果缩放变了，200%时， 1PX等于4个设备独立像素，也是就是宽和高的面积乘4倍
+   DEVICE PIXELRATIO 物理与独立像素之比 window.devicePixelRatio
+   但在MAC上 的chrome 似乎有例外。手机比较固定。
+   图片模糊：图片物理像素 与 实际显示像素不同
+
+
+   PC端的viewport：
+   设备独立像素尺寸 (window.)screen.width screen.height
+   浏览器内容尺寸 window.innerWidth window.innerHeight
+   document.documentElement.clientWidth 不含滚动条
+   document.documentElement.clientHeight 不含滚动条
+
+   移动端的VIEWPORT
+   visual viewport and layout viewport
+   IPHONE的 LAYOUT VIEWPORT 980PX渲染页面，然后慢慢缩小的屏宽。如同把img 以宽为100%的等比缩放
+   所以不设置viewport就是layout viewport这种效果 设置是对LAYOUT VIEW控制
+   content="width=device-width，minimum-scale=0.5，initial-scale=1，maximum-scale=2"
+   就是把layout-viewport 与 device-width 等同了，这样就比较好做了。
+   3
+
+   通过VISUAL VIEWPORT去看
+
+   适配方案
+   就是在一种设计图的情况下，在不同设备尺寸中 保持缩放比例
+   所以适配方案可以让width等于750设计宽度， 然后把inital-scale 进行每种设备的计算 window.innerWidht/ document.docuemntElement.clientWidth
+
+
+
+
+   ---------------------------
+   第六课CSS
+   资源查找
+   <ol id="md-id-28">
+
+         <li id="md-id-21"><a target="_blank" href="https://css-tricks.com/" title="null">CSS Tricks</a></li>
+         <li id="md-id-22"><a target="_blank" href="https://www.google.com/search?q=%E9%98%AE%E4%B8%80%E5%B3%B0+css" title="null">Google: 阮一峰 css</a></li>
+         <li id="md-id-23"><a target="_blank" href="http://www.zhangxinxu.com/wordpress/category/css/page/25/" title="null">张鑫旭的 240 多篇 CSS 博客</a></li>
+         <li id="md-id-24"><a target="_blank" href="https://tympanus.net/codrops/category/playground/" title="null">Codrops 炫酷 CSS 效果</a></li>
+         <li id="md-id-25"><a target="_blank" href="http://www.ituring.com.cn/book/1695" title="null">CSS揭秘</a></li>
+         <li id="md-id-26"><a target="_blank" href="http://cndevdocs.com/" title="null">CSS 2.1 中文 spec</a></li>
+         <li id="md-id-27"><a target="_blank" href="http://adamschwartz.co/magic-of-css/" title="null">Magic of CSS</a> 免费在线书</li>
+         </ol>
+
+
+
+
+
+
+
+
 </body>
+
 </html>
+

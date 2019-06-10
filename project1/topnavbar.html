@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ch-zn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>topNavBar</title>
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+        }
+
+        ul {
+            padding: 0;
+            margin: 0
+        }
+
+        a {
+            text-decoration: none;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* 顶部菜单样式 */
+        .topNavBar {
+            padding: 20px 16px 20px 16px;
+        }
+
+        .topNavBar .logo {
+            float: left;
+            font-family: 'Arial Black';
+            font-size: 24px;
+            padding: 4px 0px 3px 0px;
+            opacity: 1;
+            visibility: visible;
+            transition: 0.5s;
+        }
+
+        .topNavBar .rs {
+            margin-right: 4px;
+            color: #e6686a;
+        }
+
+        .topNavBar .card {
+            color: #9a9da2;
+        }
+
+        .topNavBar nav {
+            float: right;
+            padding-top: 8px;
+            transition: 0.5s;
+        }
+
+        .topNavBar nav ul {
+            list-style: none;
+            font-size:0;
+        }
+
+        .topNavBar nav li {
+            display: inline-block;
+   
+            text-align: center;
+            padding: 0 17px;
+            margin:0;
+  
+        }
+
+        .topNavBar nav a {
+            font-size: 12px;
+            color: #b7b7b7;
+            font-weight: bold;
+            border-top: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .topNavBar nav a:hover {
+            border-bottom-color: #e06567;
+        }
+
+        .topNavBar::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        @media screen and (max-width:600px) {
+            .topNavBar .logo {
+                opacity: 0;
+                visibility: hidden;
+                width: 0px;
+                height: 0px;
+                overflow: hidden;
+            }
+
+            .topNavBar nav {
+                float: none;
+
+            }
+
+            .topNavBar nav ul {
+                width: 100%;
+                display: -webkit-flex;
+                align-content: center;
+                justify-content: space-between;
+                -webkit-justify-content: space-between;
+                flex-wrap: wrap;
+                flex-direction: row;
+            }
+
+            .topNavBar nav li {
+                flex: 1;
+                padding: 10px;
+                margin: 2px;
+                white-space: nowrap;
+                background-color: #1c87db;
+                transition: 0.4s;
+            }
+
+            .topNavBar nav li:hover {
+                background-color: #dc501c;
+            }
+
+            .topNavBar nav a {
+                font-size: 5vw;
+                color: #fff;
+            }
+
+            .topNavBar nav a:hover {
+                border-bottom-color: transparent;
+
+            }
+        }
+
+        /* 顶部菜单样式 end*/
+    </style>
+</head>
+
+<body>
+    <div class="topNavBar">
+        <a class="logo" href="#" alt="logo">
+            <span class="rs">RS</span>
+            <span class="card">card</span>
+        </a>
+        <nav>
+            <ul class="">
+                <li>
+                    <a href="#">关于</a>
+                </li>
+                <li>
+                    <a href="#">技能</a>
+                </li>
+                <li>
+                    <a href="#">作品</a>
+                </li>
+                <li>
+                    <a href="#">博客</a>
+                </li>
+                <li>
+                    <a href="#">日历</a>
+                </li>
+                <li>
+                    <a href="#">联系方式</a>
+                </li>
+                <li>
+                    <a href="#">其他</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+</body>
+
+</html>
