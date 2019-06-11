@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ch-zn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>resume</title>
+    <link rel="stylesheet" href="resume.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="page-header">
+
+
+            <div class="topNavBar">
+                <a class="logo" href="#" alt="logo">
+                    <span class="rs">RS</span>
+                    <span class="card">card</span>
+                </a>
+                <nav>
+                    <ul class="">
+                        <li>
+                            <a href="#">关于</a>
+                        </li>
+                        <li>
+                            <a href="#">技能</a>
+                        </li>
+                        <li>
+                            <a href="#">作品</a>
+                        </li>
+                        <li>
+                            <a href="#">博客</a>
+                        </li>
+                        <li>
+                            <a href="#">日历</a>
+                        </li>
+                        <li>
+                            <a href="#">联系方式</a>
+                        </li>
+                        <li>
+                            <a href="#">其他</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <article class="personal-info">
+                <div class="content">
+                    <img src="avatar.jpg" alt="我的头像">
+                    <div class="info">
+                        <span class="tips">Hello</span>
+                        <h1>晏俊</h1>
+                        <p>前端开发工程师</p>
+                        <hr>
+                        <dl>
+                            <dt>年龄</dt>
+                            <dd>39</dd>
+                            <dt>所在城市</dt>
+                            <dd>上海</dd>
+                            <dt>邮箱</dt>
+                            <dd>eddie_key@163.com</dd>
+                            <dt>手机</dt>
+                            <dd>13917616917</dd>
+                        </dl>
+                    </div>
+                </div>
+
+                <footer></footer>
+            </article>
+            <article>asdffffffffffffffffffffffasdf</article>
+        </main>
+    </div>
+    <script>
+        function isMS() {
+            if (!!window.ActiveXObject || "ActiveXObject" in window) {
+                return true;
+            } else {
+
+                if (/Edge/.test(navigator.userAgent)) {
+                    return true
+                }
+                return false;
+            }
+        }
+
+        var topBar = document.querySelector(".topNavBar");
+        window.addEventListener("scroll", function (e) {
+
+                var scrollTop
+                if (isMS()) {
+                    scrollTop = document.body.scrollTop;
+                } else {
+                    scrollTop = document.documentElement.scrollTop;
+                }
+                if( scrollTop > 90 ){
+                    topBar.classList.add("graymask");                    
+                }else{
+                    topBar.classList.remove("graymask");                  
+                }
+
+        });
+    </script>
+</body>
+
+</html>
