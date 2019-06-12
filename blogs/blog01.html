@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #eee;
+        }
+
+        main {
+            background-color: #fff;
+            width: 50%;
+            min-width: 500px;
+            margin: 0px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 30px;
+            border-bottom: 1px solid gray;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        ol {
+            list-style: none;
+        }
+
+        li {
+            margin-top: 40px;
+        }
+
+        pre,
+        code {
+            background-color: #f0f0f0;
+            display: inline-block;
+            width: 400px;
+            overflow: auto;
+            resize: none;
+        }
+
+        .parent {
+            width: 400px;
+            box-shadow: 1px 1px 5px gray;
+            min-height: 200px;
+            background-color: #f0f0f0;
+        }
+
+        .hasborder {
+            border: 1px solid red;
+        }
+
+        .parent>div {
+            height: 100px;
+        }
+
+        .parent>div:first-child {
+            background-color: teal;
+        }
+
+        .parent>div:nth-child(2) {
+            background-color: slateblue;
+        }
+
+        .parent>div:last-child {
+            background-color: tomato;
+        }
+    </style>
+</head>
+
+<body>
+
+    <em>注： 以下内容不顾及语义化，因此仅用div和span两种标签。总宽在500个像素内</em>
+    <main>
+        <section>
+            <h1>左右布局</h1>
+            <p>HTML结构如下</p>
+            <pre>
+
+    &lt;div class="parent"&gt;
+        &lt;div class="left"&gt;&lt;/div&gt;
+        &lt;div class="right"&gt;&lt;/div&gt;
+    &lt;/div&gt;   
+
+</pre>
+
+            <p>默认效果如下：</p>
+            <div id="first-pad" class="parent">
+                <div class="left"></div>
+                <div class="right"></div>
+            </div>
+            <p>结果是上下布局，我们的工作就是让垂直流变为水平流。 以下会采用四种方法来达到同一种效果：</p>
+            <ol>
+                <li>
+                    <h2>float流式布局</h2>
+                    <pre>
+
+    .parent:after{
+        content:"";
+        clear:both;
+    }
+    .left{
+        float:left;
+        width:50%;
+    }
+    .right{
+        float:right;
+        width:50%;
+    }
+
+</pre>
+                    <p>需要注意的是，这种方法必须在流式布局的最后一个元素把浮动清除掉，否则父元素会失去高度</p>
+
+                </li>
+                <li>
+                    <h2>inline-block内联元素布局</h2>
+                    <pre>
+
+    .parent{
+        font-size:0;
+    }
+    .left,
+    .right{
+        display:inline-block;
+        width:50%;
+    }
+
+</pre>
+                    <p>需要注意的是，这种方法必须把父元素的字体改为0，以去掉内联元素之间的默认间距。</p>
+                </li>
+                <li>
+                    <h2>relateive相对定位布局</h2>
+                    <pre>
+
+    .left,
+    .right{
+        position:relative;
+        width:50%;
+    }
+    .right{
+        left: 50%;
+        top: -100px;
+    }
+
+    </pre>
+                    <p>需要注意的是，right元素是相对于起始位置，也就是第二行开始的位置设置位移的</p>
+                </li>
+
+                <li>
+                    <h2>absolute绝对定位布局</h2>
+                    <pre>
+
+    .parent{
+        position:relative;
+    }
+    .left,
+    .right{
+        position:absolute;
+        width:50%;
+        top:0;
+    }
+    .left:{
+        left:0;
+    }
+    .right{                
+        right: 0;
+    }
+
+            </pre>
+                    <p>需要注意的是，父元素必须把定位改为相对，否则子元素会以最顶层的根元素为浮动参考位置</p>
+
+                </li>
+                <li>
+                    <h2>flex布局</h2>
+                    <pre>
+
+    .parent{
+        display:flex;
+        justify-content:space-between;
+        align-items:flex-start;    
+    }
+    .left,
+    .right{
+        flex:1;
+    }
+
+                </pre>
+                    <p>需要注意的是，父元素必须设为flex盒子，另外对于IE来说，FLEX支持的不是很好，需要根据业务改变策略。</p>
+                </li>
+
+                <li>
+                    <h2>gird布局</h2>
+                    <pre>
+
+    .parent{
+        display: grid;
+        grid-template-columns: 50% 50%;    
+    }
+
+                    </pre>
+                    <p>需要注意的是，仅对父元素进行设计就可以完成，是否很方便的，但由于该样式还比较新，依然需要考虑兼容策略</p>
+                </li>
+
+
+            </ol>
+            <i>以上各类布局中，float，inline-block和定位式布局都是比较老的方法了，最大的问题就是对尺寸需要一定的预设，而且拓展灵活度不够。所以在能够使用flex和grid布局的情况下，尽可能使用它们</i>
+        </section>
+
+
+
+        <section>
+            <h1>水平与垂直居中</h1>
+            <p>一般在日常开发中，水平居中和垂直居中用的都比较多，而要达成目的方法也很多</p>
+
+            <ol>
+                <li>
+                    <h2>行高与文字居中</h2>
+                    <pre>
+
+    &lt;div class="parent"&gt;
+        &lt;span&gt;你好&lt;br&gt;各位同学们！&lt;/span&gt;
+    &lt;/div&gt;
+
+    .parent{
+        text-align: center;
+        line-height: 200px;
+        height:200px;
+    }
+    span{
+        display: inline-block;
+        line-height: 1;
+    }
+
+                    </pre>
+                    <p>这种方法主要针对inline和inline-block的元素很有效</p>
+                </li>
+
+                <li>
+                    <h2>padding大法</h2>
+                    <pre>
+
+    &lt;div class="parent"&gt;
+        &lt;div &gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    .parent{
+        padding:100px;
+    }
+                    </pre>
+                    <p>这个方法是让浮层的padding间隔代替子元素的宽高，挤压成水平和垂直居中</p>
+
+                </li>
+                <li>
+                    <h2>绝对定位的margin大法</h2>
+                    <pre>
+
+    &lt;div class="parent"&gt;
+        &lt;div &gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    .parent{
+        position:relative;
+    }
+    .parent>div{
+        position:absolute;
+        width:200px;
+        height:100px;
+        left:0;top:0;right:0;bottom:0;
+        margin:auto;
+    }
+                        </pre>
+                    <p>这个方法是在绝对定位时用的，margin的auto可以设置居中，但在垂直方面不管有，而这里是在绝对定位是把四个方向都设置为0时，即可产生效果</p>
+
+                </li>
+
+                <li>
+                    <h2>Flex大法</h2>
+                    <pre>
+
+    &lt;div class="parent"&gt;
+        &lt;div &gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    .parent{
+        display:flex;
+        justify-content: center;
+        align-items: center;           
+    }
+    .parent>div{
+        width:50%;
+    }
+                            </pre>
+                </li>
+
+                <li>
+                    <h2>Grid大法</h2>
+
+                    <pre>
+
+    &lt;div class="parent"&gt;
+        &lt;div &gt;&lt;/div&gt;
+    &lt;/div&gt;
+            
+    .parent{
+        display:grid;
+        grid-template-columns: 50%;
+        justify-content: center;
+        align-items: center;       
+    }
+                                </pre>
+                </li>
+            </ol>
+            <i>可以发现grid和flex在居中方面使用的方法很一致，这也说明今后的布局会越来越统一且简单化了。</i>
+        </section>
+
+        <section>
+            <h1>小技巧</h1>
+            <p>逐帧动画</p>
+            <div class="people"></div>
+            <style>
+                .people {
+                    width: 140px;
+                    height: 160px;
+                    background: url('people.png');
+                    animation: run 1s steps(1) 0s infinite both;
+
+                }
+
+
+                @keyframes run {
+                    0% {
+                        opacity: 0;
+                        transform: translateX(0);
+                        background-position: 0 0
+                    }
+
+                    10% {
+                        opacity: 0.3;
+                        transform: translateX(20px);
+                        background-position: -11% 0
+                    }
+
+                    20% {
+                        opacity: 0.6;
+                        transform: translateX(40px);
+                        background-position: -22% 0
+                    }
+
+                    30% {
+                        opacity: 0.9;
+                        transform: translateX(60px);
+                        background-position: -33% 0
+                    }
+
+                    40% {
+                        opacity: 1;
+                        transform: translateX(80px);
+                        background-position: -44% 0
+                    }
+
+                    50% {
+                        transform: translateX(100px);
+                        background-position: -55% 0
+                    }
+
+                    60% {
+                        transform: translateX(120px);
+                        background-position: -66% 0
+                    }
+
+                    70% {
+                        transform: translateX(140px);
+                        background-position: -77% 0
+                    }
+
+                    80% {
+                        opacity: 0.5;
+                        transform: translateX(160px);
+                        background-position: -88% 0
+                    }
+
+                    90% {
+                        opacity: 0.2;
+                        transform: translateX(180px);
+                        background-position: -99% 0
+                    }
+
+                    100% {
+                        opacity: 0;
+                        background-position: 0 0
+                    }
+                }
+            </style>
+<p>代码如下：</p>
+<pre>
+    
+    .people {
+        width: 140px;
+        height: 160px;
+        background: url('people.png');
+        animation: run 1s steps(1) 0s infinite both;
+
+    }
+
+
+    @keyframes run {
+        0% {
+            opacity: 0;
+            transform: translateX(0);
+            background-position: 0 0
+        }
+
+        10% {
+            opacity: 0.3;
+            transform: translateX(20px);
+            background-position: -11% 0
+        }
+
+        20% {
+            opacity: 0.6;
+            transform: translateX(40px);
+            background-position: -22% 0
+        }
+
+        30% {
+            opacity: 0.9;
+            transform: translateX(60px);
+            background-position: -33% 0
+        }
+
+        40% {
+            opacity: 1;
+            transform: translateX(80px);
+            background-position: -44% 0
+        }
+
+        50% {
+            transform: translateX(100px);
+            background-position: -55% 0
+        }
+
+        60% {
+            transform: translateX(120px);
+            background-position: -66% 0
+        }
+
+        70% {
+            transform: translateX(140px);
+            background-position: -77% 0
+        }
+
+        80% {
+            opacity: 0.5;
+            transform: translateX(160px);
+            background-position: -88% 0
+        }
+
+        90% {
+            opacity: 0.2;
+            transform: translateX(180px);
+            background-position: -99% 0
+        }
+
+        100% {
+            opacity: 0;
+            background-position: 0 0
+        }
+    }
+</pre>
+        </section>
+    </main>
+
+
+</body>
+
+</html>
