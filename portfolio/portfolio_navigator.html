@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            font-family: Arial, Helvetica, sans-serif;
+
+        }
+
+        body {
+
+            background: url('../images/am01.jpg') center top no-repeat;
+            background-size: 500px;
+            color: #00a0e8;
+        }
+
+        main {
+            min-width: 1024px;
+            background: rgba(245, 185, 156, 0.9);
+
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        #pad {
+            text-align: center
+        }
+
+        kbd {
+            position: relative;
+            color: #fff;
+            text-align: left;
+            box-shadow: 0px 2px 5px gray;
+            border: 1px solid gray;
+            border-top-color: #fff;
+            background-color: #f2f2f2;
+            width: 60px;
+            height: 60px;
+            padding-top: 5px;
+            padding-left: 5px;
+            margin: 10px;
+            display: inline-block;
+            user-select: none;
+            text-transform: uppercase;
+            border-radius: 8px;
+
+
+
+
+            background: rgb(255, 255, 255);
+            /* Old browsers */
+
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 14%, rgba(255, 255, 255, 1) 25%, rgba(60, 124, 188, 1) 28%, rgba(73, 155, 234, 1) 41%, rgba(32, 124, 229, 1) 100%);
+            /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+
+        }
+
+        kbd:hover {
+            color: #f0f0f0;
+            cursor: pointer;
+
+            background: rgb(255, 255, 255);
+            /* Old browsers */
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 14%, rgba(255, 255, 255, 1) 37%, rgba(60, 124, 188, 1) 40%, rgba(73, 155, 234, 1) 54%, rgba(32, 124, 229, 1) 100%);
+            /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+        }
+
+        kbd img {
+            position: absolute;
+            top: 30%;
+            left: 30%;
+            width: 40%;
+            height: 40%;
+            border-radius: 50%;
+        }
+
+        kbd.actived {
+            color: #f0f0f0;
+            cursor: pointer;
+
+
+            /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+0,ffffff+14,ffffff+37,3c7cbc+40,499bea+54,207ce5+100 */
+            background: rgb(255, 255, 255);
+            /* Old browsers */
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 14%, rgba(255, 255, 255, 1) 37%, rgba(60, 124, 188, 1) 40%, rgba(73, 155, 234, 1) 54%, rgba(32, 124, 229, 1) 100%);
+
+
+        }
+
+        .ado {
+            display: block;
+            position: absolute;
+            right: 80px;
+            bottom: 50px;
+            background: url('../images/am02.jpg') right center no-repeat;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-size: cover;
+            box-shadow: 0px 0px 10px gray;
+            cursor: pointer;
+        }
+
+        .ado:after {
+            box-shadow: inset 0px 0px 5px rgb(192, 140, 113);
+            background-color: rgba(245, 185, 156, 1);
+            content: "";
+            position: absolute;
+            width: 30%;
+            height: 30%;
+            top: 35%;
+            left: 35%;
+            border-radius: 50%;
+
+        }
+
+        .ado.run {
+            animation: run 5s infinite linear;
+        }
+
+        @keyframes run {
+            from {
+                transform: rotate(0deg)
+            }
+
+            to {
+                transform: rotate(359deg)
+            }
+        }
+
+        .popwin {
+            display: none;
+            right: 220px;
+            bottom: 300px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            position: absolute;
+            background: #fff;
+            border: 3px solid black;
+            padding: 40px 30px;
+            border-radius: 50%;
+            color: black;
+        }
+
+        .popwin:after {
+            position: absolute;
+            right: 0px;
+            bottom: -70px;
+            content: "";
+            width: 30px;
+            height: 20px;
+            border: 3px solid black;
+            background: #fff;
+            border-radius: 50%;
+
+        }
+
+        .popwin:before {
+            position: absolute;
+            right: 10px;
+            bottom: -50px;
+            content: "";
+            width: 60px;
+            height: 40px;
+            border: 3px solid black;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        .popShow {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <audio id="ado" src="mic.mp3"></audio>
+
+    <main>
+        
+        <section id="pad">
+
+        </section>
+    </main>
+    <div class="popwin">
+        请先设置地址哦~ ^_^
+    </div>
+    <div class="ado"></div>
+
+    <script>
+        
+        var dataList;
+        var keyHash = {}; //快速查找对照表
+        init();
+
+        function init() {
+            if (null == localStorage.getItem("portfolio_init")) {
+                getDefaultData(function (data) {
+                    dataList = data.data;
+                    rander();
+                    //localStorage.setItem("portfolio_init", data );
+                });
+            } else {
+                dataList = JSON.parse(localStorage.getItem("portfolio_init")).data;
+                rander();
+            }
+        }
+
+        function getDefaultData(callback) {
+            let scriptBox = document.createElement("script");
+            scriptBox.addEventListener("load", function (e) {
+                if (callback) {
+                    //将脚本中的getInitData函数进行执行，得到初始化数据
+                    callback(getInitData());
+                }
+            })
+            scriptBox.src = "init.js";
+            document.body.appendChild(scriptBox);
+        }
+
+        function rander() {
+            let i = dataList.length;
+            let domList = [];
+            let title, imgUrl, linkUrl, kname;
+            while (i--) {
+                kname = dataList[i].name;
+                if (dataList[i].curLink != -1) { //判断是否有设置地址信息
+                    title = dataList[i].title;
+                    linkUrl = dataList[i].link;
+                    imgDom = `<img src="${dataList[i].imgSrc}" alt="${title}">`;
+
+                } else {
+                    title = "";
+                    linkUrl = "";
+                    imgDom = "";
+                }
+                if (kname == "p" || kname == "l") { //折行
+                    domList[dataList[i].loc] =
+                        `<kbd id="kbd_${kname}" title="${title}" data-url="${linkUrl}" onclick="clickEvent(this)">${kname} 
+                            ${imgDom}  
+                         </kbd><br>`;
+                } else {
+                    domList[dataList[i].loc] =
+                        `<kbd id="kbd_${kname}" title="${title}" data-url="${linkUrl}" onclick="clickEvent(this)">${kname}
+                            ${imgDom}  
+                         </kbd>`;
+                }
+                //创建快速查找对照表，用于对照dataList内容
+                keyHash[kname] = i;
+            }
+
+            document.querySelector("#pad").innerHTML = domList.join('');
+        }
+        //当前点击的按钮
+        var curKBD = {
+            "keyName": "",
+            "elem": null
+        };
+        window.addEventListener("keypress", function (e) {
+            let = keys = String.fromCharCode(e.keyCode);
+            if (/[a-zA-Z]/.test(keys)) {
+                if (curKBD.keyName == "") { //强制控制不能同时按几个键
+                    curKBD.keyName = keys.toLowerCase();
+                    curKBD.elem = document.querySelector(`#kbd_${curKBD.keyName}`);
+
+                    if (curKBD.elem) {
+                        curKBD.elem.classList.add("actived");
+                    } else {
+                        curKBD.keyName = "";
+                    }
+                }
+            }
+        });
+        var st;
+        window.addEventListener("keyup", function (e) {
+            if (curKBD.keyName != "" && curKBD.keyName == String.fromCharCode(e.keyCode).toLowerCase()) {
+                curKBD.elem.classList.remove("actived");
+
+                if ("" !== curKBD.elem.getAttribute("data-url")) {
+                    window.open(curKBD.elem.getAttribute("data-url"), "_blank");
+                } else {
+                    showPop();
+                }
+
+                curKBD.elem = null;
+                curKBD.keyName = "";
+            }
+        })
+
+        function clickEvent(e) {
+            let ikey = e.id.split('_')[1];
+            let hashIdx = keyHash[ikey];
+            let showURL = "";
+            let curData = dataList[hashIdx];
+            if (dataList[keyHash[ikey]].curLink != -1) {
+                showURL = curData.link + "|" + curData.title;
+            }
+
+            let result = window.prompt(`请在"${ikey}"键上设置您的地址，加"|"后可添加描述`, showURL);
+
+
+            if (result) {
+                let iurlD = result.split('|');
+                if (/^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-.,@?^=%&:\/~+#]*[\w\-@?^=%&\/~+#])?$/.test(iurlD[0])) {
+                    curData.imgSrc = `${iurlD[0]}/favicon.ico`,
+                        curData.title = iurlD.length > 1 ? iurlD[1] : "",
+                        curData.link = iurlD[0]
+
+                    curData.curLink = 0;
+                    //直接修改当前按钮的显示及功能
+
+                    e.setAttribute("title", curData.title);
+                    e.setAttribute("data-url", curData.link);
+                    e.innerHTML = `${ikey}<img src="${curData.imgSrc}" alt="${curData.title}">`;
+
+                    //保存
+                    saveData();
+                } else {
+                    alert("网址输入格式不正确！")
+                }
+            }
+        }
+
+        function saveData() {
+            let result = JSON.stringify({
+                "data": dataList
+            });
+            localStorage.setItem("portfolio_init", result);
+        }
+
+        function showPop() {
+            let dom = document.querySelector(".popwin");
+
+            dom.setAttribute("popShow", "")
+            dom.classList.add("popShow");
+            clearTimeout(st);
+
+            var st = setTimeout(() => {
+                dom.removeAttribute("popShow")
+                dom.classList.remove("popShow");
+                clearTimeout(st);
+            }, 2000)
+        
+        }
+
+        var isplay = false;
+        document.querySelector(".ado").addEventListener("click", function (e) {
+            
+            if (!isplay) {
+                isplay = true;
+                document.querySelector("#ado").play();
+                e.target.classList.add("run");
+
+            } else {
+                isplay = false;
+                document.querySelector("#ado").pause();
+                e.target.classList.remove("run");
+            }
+        })
+    </script>
+</body>
+
+</html>
