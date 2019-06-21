@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        canvas {
+            position: absolute;
+            background-color: #f0f0f0;
+            top: 30px;
+            left: 30px;
+            border: 1px solid black;
+
+        }
+
+        #ssss {
+            position: absolute;
+            opacity: 0;
+        }
+
+        #btn {
+            position: absolute;
+            z-index: 9999;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .actived {
+            border: 2px solid red;
+        }
+        span{
+            display: inline-block;
+            border:1px solid gray;
+            width:30px;
+            height:20px;
+        }
+        #green{
+            background-color:green;          
+        }
+        #black{
+            background-color:black;
+        }
+        #blue{
+            background-color:blue;
+        }
+
+        #weight{
+            cursor: pointer;
+            display: inline-block;
+        }
+        
+    </style>
+</head>
+
+<body>
+   
+    <button id="ht" class="actived" autofocus>画图</button>
+    <button id="xp">橡皮</button>
+    
+    <span id="black" class="actived"></span>
+    <span id="green" class=""></span>
+    <span id="blue" class=""></span>
+
+    <p id="weight" data-weight="normal">细</p>
+
+    <canvas id="draw-board" width="1024" height="768"></canvas>
+
+
+    <script>
+        var canvasDom = document.getElementById("draw-board");
+        var margin = 60;
+        var curColor = "black";
+
+        canvasDom.width = document.documentElement.clientWidth - margin;
+        canvasDom.height = document.documentElement.clientHeight - margin;
+
+        var curType = "DRAW_PAN";
+        const DRAW_TYPE = {
+            "FILL_REACT": 0,
+            "DRAW_PAN": 1,
+            "RUBBER": 2
+        }
+        mobileInit();
+        let isMobile =  "ontouchstart" in document.documentElement;
+
+        if(document.ontouchstart){
+            mobileInit();
+        }else{
+            init();
+        }
+        
+        var bWeight = 2;
+        document.querySelector("#weight").addEventListener("click",function(e){
+            if(e.target.getAttribute("data-weight") == "normal" ){
+                bWeight = 8;
+                e.target.textContent = "粗";
+                e.target.setAttribute("data-weight","bold");
+            }else{
+                bWeight = 2;
+                e.target.textContent = "细";         
+                e.target.setAttribute("data-weight","normal");       
+            }
+        })
+        
+
+        function draw_fillRect(ctx, x, y, w, h) {
+            ctx.fillStyle = curColor;
+            ctx.fillRect(x, y, w, h);
+        }
+
+        function init() {
+            var ctx = canvasDom.getContext("2d");
+
+            var oldms = {
+                "x": 0,
+                "y": 0
+            }
+            var isDrow = false;
+
+            var curBtnId = "ht";
+            Array.prototype.forEach.call(document.querySelectorAll("button"), function (elem) {
+                elem.addEventListener("click", function (e) {
+                    document.getElementById(curBtnId).classList.remove("actived");
+                    e.target.classList.add("actived");
+                    curBtnId = e.target.id;
+
+                    switch (e.target.id) {
+                        case "ht":
+                            curType = "DRAW_PAN";
+                            break;
+                        case "xp":
+                            curType = "RUBBER";
+                            break;
+                    }
+                })
+            })
+            
+            Array.prototype.forEach.call(document.querySelectorAll("span"), function (elem) {
+                elem.addEventListener("click", function (e) {
+                    document.getElementById(curColor).classList.remove("actived");
+                    e.target.classList.add("actived");
+                    curColor = e.target.id;                    
+                })
+            })
+
+            document.addEventListener("mouseout", function (e) {
+                isDrow = false;
+                ctx.closePath();
+                //画笔出浏览器
+            })
+
+            document.addEventListener("mousedown", function (e) {
+                switch (DRAW_TYPE[curType]) {
+                    case 0:
+                        oldms.x = e.clientX - (margin / 2);
+                        oldms.y = e.clientY - (margin / 2);
+                        break;
+                    case 1:
+                        ctx.lineWidth = bWeight;
+                        ctx.strokeStyle = curColor;
+                        ctx.beginPath();
+                        ctx.moveTo(e.clientX - (margin / 2), e.clientY - (margin / 2));
+                        break;
+                    case 2:
+                        ctx.clearRect(e.clientX - (margin / 2) - 5, e.clientY - (margin / 2) -5, 10, 10)
+                        break;
+                }
+
+                isDrow = true;
+            });
+            document.addEventListener("mousemove", function (e) {
+                if (isDrow) {
+                    switch (DRAW_TYPE[curType]) {
+                        case 0:
+                            draw_fillRect(ctx, oldms.x, oldms.y, e.clientX - oldms.x - (margin / 2), e.clientY -
+                                oldms.y - (margin / 2));
+                            break;
+                        case 1:
+
+                            ctx.lineTo(e.clientX - (margin / 2), e.clientY - (margin / 2));
+                            ctx.stroke();
+                            break;
+                        case 2:
+                            ctx.clearRect(e.clientX - (margin / 2)-5, e.clientY - (margin / 2)-5, 10, 10)
+                            break;
+                    }
+                }
+            });
+            document.addEventListener("mouseup", function (e) {
+                isDrow = false;
+            });
+        
+            var dctime = "";
+            window.addEventListener("resize", function () {
+                clearTimeout(dctime);
+                dctime = setTimeout(function () {
+                   
+                    canvasDom.width = document.documentElement.clientWidth - margin;
+                    canvasDom.height = document.documentElement.clientHeight - margin;
+
+                    clearTimeout(dctime);
+                }, 1000)
+            })
+        }
+
+
+        function mobileInit() {
+            var ctx = canvasDom.getContext("2d");
+
+            var oldms = {
+                "x": 0,
+                "y": 0
+            }
+            var isDrow = false;
+
+            var curBtnId = "ht";
+            Array.prototype.forEach.call(document.querySelectorAll("button"), function (elem) {
+                elem.addEventListener("click", function (e) {
+                    document.getElementById(curBtnId).classList.remove("actived");
+                    e.target.classList.add("actived");
+                    curBtnId = e.target.id;
+
+                    switch (e.target.id) {
+                        case "ht":
+                            curType = "DRAW_PAN";
+                            break;
+                        case "xp":
+                            curType = "RUBBER";
+                            break;
+                    }
+                })
+            })
+            
+            Array.prototype.forEach.call(document.querySelectorAll("span"), function (elem) {
+                elem.addEventListener("click", function (e) {
+                    document.getElementById(curColor).classList.remove("actived");
+                    e.target.classList.add("actived");
+                    curColor = e.target.id;                    
+                })
+            })
+
+            // document.addEventListener("mouseout", function (e) {
+            //     isDrow = false;
+            //     ctx.closePath();
+            //     //画笔出浏览器
+            // })
+
+            document.addEventListener("touchstart", function (event) {
+                
+                let e ={
+                    "clientX" :event.touches[0].clientX,
+                    "clientY" :event.touches[0].clientY,
+                }
+                console.info(e)
+                switch (DRAW_TYPE[curType]) {
+                    case 0:
+                        oldms.x = e.clientX - (margin / 2);
+                        oldms.y = e.clientY - (margin / 2);
+                        break;
+                    case 1:
+                        ctx.lineWidth = 5;
+                        ctx.strokeStyle = curColor;
+                        ctx.beginPath();
+                        ctx.moveTo(e.clientX - (margin / 2), e.clientY - (margin / 2));
+                        break;
+                    case 2:
+                        ctx.clearRect(e.clientX - (margin / 2) - 5, e.clientY - (margin / 2) -5, 10, 10)
+                        break;
+                }
+                
+
+         
+                isDrow = true;
+            });
+            document.addEventListener("touchmove", function (event) {
+                let e ={
+                    "clientX" :event.touches[0].clientX,
+                    "clientY" :event.touches[0].clientY,
+                }
+                if (isDrow) {
+                    switch (DRAW_TYPE[curType]) {
+                        case 0:
+                            draw_fillRect(ctx, oldms.x, oldms.y, e.clientX - oldms.x - (margin / 2), e.clientY -
+                                oldms.y - (margin / 2));
+                            break;
+                        case 1:
+
+                            ctx.lineTo(e.clientX - (margin / 2), e.clientY - (margin / 2));
+                            ctx.stroke();
+                            break;
+                        case 2:
+                            ctx.clearRect(e.clientX - (margin / 2)-5, e.clientY - (margin / 2)-5, 10, 10)
+                            break;
+                    }
+                }
+            });
+            document.addEventListener("touchend", function (e) {
+                isDrow = false;
+            });
+        
+            var dctime = "";
+            window.addEventListener("resize", function () {
+                clearTimeout(dctime);
+                dctime = setTimeout(function () {
+                   
+                    canvasDom.width = document.documentElement.clientWidth - margin;
+                    canvasDom.height = document.documentElement.clientHeight - margin;
+
+                    clearTimeout(dctime);
+                }, 1000)
+            })
+        }
+      
+    </script>
+</body>
+
+</html>
