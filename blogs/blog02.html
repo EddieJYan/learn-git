@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        pre{
+            background-color:#f0f0f0;
+            padding:10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>
+        Javascript的类型
+    </h1>
+
+    <ul>
+        <li>
+            <h2>数值[number]</h2>
+            <p>用于代表各类数值，包括二进制、八进制、十六进制和常用的十进制</p>
+            <pre>
+                    以十进制 12 为例
+                    // 十进制也可以表示为
+                    1.2e1                    
+                    // 二进制
+                    0b1100; 
+                    // 八进制 
+                    014; 【非严格模式】
+                    // 十六进制
+                    0xc /
+
+                    parseInt(需要转的字符串, 进制); .e.g parseInt("1000",2) //8;
+                    parseFloat() //对小数进行转换
+            </pre>
+            <a href="https://www.bookstack.cn/read/javascript-tutorial/docs-stdlib-number.md">详细进入>></a>
+        </li>
+        <li>
+            <h2>字符串[string]</h2>
+            <p>用于代表各种字符，包括符号、字母、数字以及各种国家文字，是最广泛的使用类型。</p>
+            <pre>
+                    //空字符串
+                    "" || `` || '' 
+                    //带空格符的字符串 
+                    " "; 
+                    //如果需要对输入特定字符，就需要进行转义
+                    \"  转义双引号
+                    \'  转义单引号
+                    \n  转义回车
+                    \t  转义Tab
+                    \\  转义反斜杠
+            </pre>
+            <a href="https://www.bookstack.cn/read/javascript-tutorial/docs-stdlib-string.md">详细进入>></a>
+        </li>
+        <li>
+            <h2>布尔[boolean]</h2>
+            <p>一种逻辑判断类型，只有真true和假false</p>
+            <pre> 
+                //多用于判断语法
+                var result;
+                if( result ){
+                    //执行true结果
+                }else{
+                    //执行false结果
+                }
+                //在判断逻辑中还有两种运算符搭配 &&逻辑与  和 ||逻辑或
+                var resultA;  var resultA;
+                if( resultA && resultA){
+                    //如果resultA和resultB都为true 则执行
+                }
+                if( resultA || resultA){
+                    //如果resultA和resultB有一个为true 则执行
+                }
+            </pre>
+            <a href="https://www.bookstack.cn/read/javascript-tutorial/docs-stdlib-boolean.md">详细进入</a>
+        </li>
+        <li>
+            <h2>记号[Symbol] ES6版本引入</h2>
+            <p>用于生成一个全局唯一值</p>
+            <pre>
+                var TYPE = {
+                    "STATUS1":symbol(),
+                    "STATUS2":symbol(),
+                    "STATUS3":symbol()
+                }
+                TYPE.STATUS1 !== TYPE.STATUS2 //true   
+            </pre>
+            <a href="https://zhuanlan.zhihu.com/p/22652486">详细进入</a>
+        </li>
+        <li>
+            <h2>空[null]</h2>
+            <p>表示空值，习惯用于无赋值的对象，在typeof中也显示为object</p>
+            <pre>
+                var iObj = null;
+            </pre>            
+        </li>
+        <li>
+            <h2>未定义[undefined]</h2>
+            <p>表示空值，与null不同的是，undefined是标准的类型空值，typeof中可以判断出 "undefined"</p>
+            <pre>                
+                var temp; //"undefined
+            </pre>
+        </li>
+        <li>
+            <h2>对象[object]</h2>
+            <p>对象不同于其他基本类型，它主要是对基本类型的组合。</p>
+            <pre>
+                //常用内置对象有：
+                //Date日期
+                    Object.prototype.toString.call(new Date());//"[object Date]"
+                //Array数组
+                    类型判断： Object.prototype.toString.call([]);//"[object Array]"
+                //Function函数
+                    类型判断： typeof Function;// "function"  这个比较特殊
+                //Math算数    
+                    类型判断： Math.toString(); //"[object Math]"
+                //JSON
+                    类型判断：JSON.toString(); //"[object JSON]"
+                //RegExp正则
+                    类型判断： Object.prototype.toString.call(new RegExp());//"[object RegExp]"
+
+            </pre>
+        </li>
+    </ul>
+
+<script>
+   
+</script>
+</body>
+
+</html>
