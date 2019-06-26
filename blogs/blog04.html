@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原型与原型链</title>
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        i {
+            color: red;
+        }
+
+        pre {
+            background-color: #f2f2f2;
+            padding: 10px;
+            font-size: 12px
+        }
+
+        body {
+            margin: 30px;
+            max-width: 1024px;
+            ;
+        }
+
+        p {
+            text-indent: 2em;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>原型与原型链</h1>
+    <p>说到JS的基础中，原型和原型链是绕不过的话题, 它是在ES6之前没有Class语法糖的情况下试图模仿类时所绝对不能忽视的知识点，了解原型和原型链可以帮助我们了解整个JS的
+        对象和函数体系的关联性。
+        当然，外面的讲解很多，有图解的，也有长篇大论的。但对于有些抽象的知识，图解和长篇语言有时反而会造成二次抽象，加大了理解的难度。因此，我就是直接用HASH数据结构来
+        模拟写出原型与原型链之间的关系。我相信这样跟容易理解，也更容易在调试工具中举证我的概念，最重要的是这个方式可以更接地气【代码】</p>
+    <i>注：以下需要前置一些知识，即【函数，对象和实例】 以及至少了解HASH的数据结构。</i>
+
+    <p>我先给出结论，让大家了解只看结论的痛苦，然后再看看代码，是否会舒服且容易理解很多</p>
+
+    <ol>
+        <li>JS的实例化就是把需要实例的对象（姑且称为元对象）自己的原型(prototype)克隆了一套“新”的副本给新声明的变量名使用，同时在其__proto__ 中加了元对象原型(prototype)的引用地址。</li>
+        <li>只要是函数必定会有一个自己的原型(prototype)，
+            只要是对象必定会有一个自己的原型引用(__proto__)，他们是JS自动赠送的。因此作为既是对象又是函数的元对象来说，总是有原型prototype和自己的原型引用__proto__</li>
+        <li>如果元对象不是Object对象，那么这个元对象原型中的__proto__会一直往上一个关联元对象进行指引，直到指向Object对象原型(prototype)为止。</li>
+        <li>Object原型中的__proto__指向 null。 这样可以避免无限循环。</li>
+        <li>所有元对象都有函数的属性，所以他们自己的__proto__（不是原型prototype中的__proto__）都是指向 Function原型(prototype)。包括 Obejct 和 Function自己
+        </li>
+        <li>Function原型的__proto__最终指向 Object的原型(prototype)，所以Object是根对象。</li>
+        <li>整个体系就是以对象原型(prototype)中的原型引用__proto__，与上一个关联元对象的原型(prototype)进行联系而形成的原型链结构</li>
+    </ol>
+
+    <pre>
+    //以下是页面初始化时，进行的基本对象预加载，也就是最初的对象原型链结构的生成。    
+    window = {  
+        Number:{  //数值对象
+            prototype:{   //这个就是Number的原型
+               toFixed() //属于Number的各种公用方法。
+               .
+               .
+                __proto__: Object.prototype //引用Object元对象的原型地址
+            }
+            __proto__: Function.protoType //引用Function元对象的原型地址
+        },
+        Function:{ //函数对象
+            prototype:{
+                .
+                .
+                __proto__: Object.prototype  //这里同Number
+            }
+            __proto__: Function.prototype //这里同Number，只是自己引用自己的原型感觉很奇怪吧 ：）
+        }
+        Object:{  //对象【所有子对象的老祖】
+            prototype:{
+                toString:function(){}, //对象的公用方法... 由于所有的对象最终都引用到这里，所以所有对象都能使用toString()
+                .
+                .
+                __proto__: null //根对象已经是顶层，所以直接null 防止无限循环
+            }
+            __proto__: Function.prototype  //这个同其他所有的对象一样，依然指向 functiona的原型。 
+        }
+    }
+    
+    //下面实例一个Number对象
+    var a = new Number(); //创建一个Number的原型副本给了a
+
+    //实例化后a的原型结构
+    a:{   //这个a就等于 Number.prototype 的副本
+        ...    //可以创建自己的方法
+        __proto__: Number.prototype //引用Number元对象的公用属性
+    }
+</pre>
+
+    <p>最后给出一个校验的等式，都是为true。也可以较为简单地理解他们之间的关系。别忘了先 var a = new Number();哦 </p>
+    <ol>
+        <li>a.__proto__ === Number.prototype</li>
+        <li>Number.__proto__ === Function.prototype</li>
+        <li>Number.prototype.__proto__ === Object.prototype</li>
+        <li>Function.__proto__ === Function.prototype</li>
+        <li>Function.prototype.__proto__ === Object.prototype</li>
+        <li>Object.__proto__ === Function.prototype</li>
+        <li>Object.prototype.__proto__ === null</li>
+    </ol>
+</body>
+
+</html>
