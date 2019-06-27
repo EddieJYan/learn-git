@@ -19,7 +19,9 @@ a {
 ul,
 ol {
     list-style: none;
-
+}
+li{
+    display: inline-block
 }
 
 
@@ -54,10 +56,7 @@ ol {
 
 }
 
-.graymask {
-    transition: 1s;
-    background-color: rgba(0, 0, 0, 0.8);
-}
+
 
 .topNavBar .logo {
     float: left;
@@ -85,6 +84,10 @@ ol {
     transition: 0.5s;
 }
 
+
+
+
+
 .topNavBar nav ul {
     list-style: none;
     font-size: 0;
@@ -92,11 +95,10 @@ ol {
 
 .topNavBar nav li {
     display: inline-block;
-
     text-align: center;
     padding: 0 17px;
     margin: 0;
-
+    position: relative;
 }
 
 .topNavBar nav a {
@@ -109,12 +111,35 @@ ol {
     padding-bottom: 5px;
     display: block;
     transition: 0.3s;
-
+    position: relative;
+}
+.topNavBar nav a:after{
+    content:"";
+    display: inline-block;
+    position: absolute;
+    left:0;
+    bottom:0;
+    height:3px;
+    width:0%;
+    background-color: #e06567;
+    transition: 0.3s;
+}
+.topNavBar nav a:hover::after{
+    width:100%;
+}
+.topNavBar nav .hasPwin>a:hover::after{
+    width:0%;
+}
+.topNavBar nav .hasPwin:hover .pwin{
+    opacity: 1;
 }
 
-.topNavBar nav a:hover {
+
+/* .topNavBar nav a:hover {
     border-bottom-color: #e06567;
-}
+} */
+
+
 
 .topNavBar::after {
     content: "";
@@ -122,6 +147,40 @@ ol {
     clear: both;
 }
 
+.topNavBar nav li .pwin{
+    transition: 0.5s;
+    opacity: 0;
+    position: absolute;
+    right:17px;
+    top:30px;
+    background-color:#fff;
+    border-radius: 3px;
+    box-shadow: 3px 3px 5px gray;
+
+}
+.topNavBar nav li .pwin li{
+    padding:5px 15px;
+}
+.topNavBar nav li .pwin li a{
+    word-break:keep-all;
+    white-space:nowrap;
+}
+
+
+/* 滚动时将Bar高度减少 */
+.graymask {
+    transition: 1s;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+.graymask{
+    padding:0;
+}
+.graymask nav {
+    padding-top: 3px;
+}
+.graymask nav a{
+    color:black;
+}
 @media screen and (max-width:600px) {
     .topNavBar {
         padding: 0
@@ -158,6 +217,7 @@ ol {
         white-space: nowrap;
         background-color: #1c87db;
         transition: 0.4s;
+        position: relative;
     }
 
     .topNavBar nav li:hover {

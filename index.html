@@ -21,9 +21,15 @@
           <span class="card">card</span>
         </a>
         <nav>
-          <ul class="">
-            <li>
+          <ul>
+            <li class="hasPwin">
               <a href="#">关于</a>
+              <div class="pwin">
+                <ul>
+                  <li><a href="">选型一</a></li>
+                  <li><a href="">选型二</a></li>
+                </ul>
+              </div>
             </li>
             <li>
               <a href="#">技能</a>
@@ -31,8 +37,14 @@
             <li>
               <a href="#">作品</a>
             </li>
-            <li>
+            <li class="hasPwin">
               <a href="#">博客</a>
+              <div class="pwin">
+                <ul>
+                  <li><a href="">选型一</a></li>
+                  <li><a href="">选型二</a></li>
+                </ul>
+              </div>
             </li>
             <li>
               <a href="#">日历</a>
@@ -187,17 +199,22 @@
       elem.addEventListener("load", function (e) {
         addLoadMsg(e.target.src + "  completed!");
         imgCount--;
-        if (imgCount <= 1) {          
-          document.body.style = "";
-          $("#mask", 1).style = "display:none;"
+        if (imgCount <= 1) {
+          setTimeout(function () {
+            document.body.style = "";
+            $("#mask", 1).style = "display:none;"
+          }, 1200)
+
         }
       })
       elem.addEventListener("error", function (e) {
         addLoadMsg(e.target.src + "  error!", "red");
         imgCount--;
         if (imgCount <= 1) {
-          document.body.style = "";
-          $("#mask", 1).style = "display:none;"
+          setTimeout(function () {
+            document.body.style = "";
+            $("#mask", 1).style = "display:none;"
+          }, 1200)
         }
       })
     });
@@ -226,6 +243,7 @@
       }
       if (scrollTop > 90) {
         topBar.classList.add("graymask");
+
       } else {
         topBar.classList.remove("graymask");
       }
