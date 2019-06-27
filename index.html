@@ -6,16 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>resume</title>
-  <link rel="stylesheet" href="css/index.css?v=1.0">
+  <link rel="stylesheet" href="css/index.css?v=1.2">
+
 </head>
 
-<body>
-  <script>
-   var a;
- console.info("result:"+a);
- a = 3;
- 
-  </script>
+<body style="overflow: hidden;">
   <div class="wrapper">
     <header class="page-header">
 
@@ -167,7 +162,47 @@
       </article>
     </main>
   </div>
+
+  <img src="blogs/blog3img01.png" alt="">
+  <img src="blogs/blog3img03.png" alt="">
+  <img src="blogs/blog3img04.png" alt="">
+  <img src="blogs/blog3img02.png" alt="">
+  <img src="blogs/blog04.png" alt="">
+
+  <div id="mask">
+    <p id="loadmsg" style="margin:20px;font-size:12px;"></p>
+    <span>LOADING...</span>
+  </div>
+
+
   <script>
+    var $ = (str, t) => t ? document.querySelector(str) : document.querySelectorAll(str);
+    var allImg = $("img");
+    var msgDom = $("#loadmsg", 1);
+    var imgCount = allImg.length;
+    var addLoadMsg = (str, color = "black") => msgDom.innerHTML += `<p style="color:${color}">${str}</p>`;
+
+
+    $("img").forEach(elem => {
+      elem.addEventListener("load", function (e) {
+        addLoadMsg(e.target.src + "  completed!");
+        imgCount--;
+        if (imgCount <= 1) {          
+          document.body.style = "";
+          $("#mask", 1).style = "display:none;"
+        }
+      })
+      elem.addEventListener("error", function (e) {
+        addLoadMsg(e.target.src + "  error!", "red");
+        imgCount--;
+        if (imgCount <= 1) {
+          document.body.style = "";
+          $("#mask", 1).style = "display:none;"
+        }
+      })
+    });
+
+
     function isMS() {
       if (!!window.ActiveXObject || "ActiveXObject" in window) {
         return true;
