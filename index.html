@@ -2,264 +2,332 @@
 <html lang="ch-zn">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>resume</title>
-  <link rel="stylesheet" href="css/index.css?v=1.2">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>resume</title>
+    <link rel="stylesheet" href="css/index.css?v=1.3">
 
 </head>
 
 <body style="overflow: hidden;">
-  <div class="wrapper">
-    <header class="page-header">
+    <div id="wrapper" class="wrapper">
+        <header class="page-header">
 
 
-      <div class="topNavBar">
-        <a class="logo" href="#" alt="logo">
-          <span class="rs">RS</span>
-          <span class="card">card</span>
-        </a>
-        <nav>
-          <ul>
-            <li class="hasPwin">
-              <a href="#">关于</a>
-              <div class="pwin">
-                <ul>
-                  <li><a href="">选型一</a></li>
-                  <li><a href="">选型二</a></li>
-                </ul>
-              </div>
-            </li>
-            <li>
-              <a href="#">技能</a>
-            </li>
-            <li>
-              <a href="#">作品</a>
-            </li>
-            <li class="hasPwin">
-              <a href="#">博客</a>
-              <div class="pwin">
-                <ul>
-                  <li><a href="">选型一</a></li>
-                  <li><a href="">选型二</a></li>
-                </ul>
-              </div>
-            </li>
-            <li>
-              <a href="#">日历</a>
-            </li>
-            <li>
-              <a href="#">联系方式</a>
-            </li>
-            <li>
-              <a href="#">其他</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-
-    <main>
-      <article class="personal-info">
-        <div class="content">
-          <img src="images/avatar.jpg" alt="我的头像">
-          <div class="info">
-            <span class="tips">Hello</span>
-            <h1>晏俊</h1>
-            <p>前端开发工程师</p>
-            <hr>
-            <dl>
-              <dt>年龄</dt>
-              <dd>39</dd>
-              <dt>所在城市</dt>
-              <dd>上海</dd>
-              <dt>邮箱</dt>
-              <dd>eddie_key@163.com</dd>
-              <dt>手机</dt>
-              <dd>13917616917</dd>
-            </dl>
-          </div>
-        </div>
-
-        <footer>
-
-        </footer>
-      </article>
-
-      <article class="jieshao">
-        <a class="btn-download">下载简历（PDF）</a>
-        <p>
-          晏俊， 前端工程师，现在在 饥人谷 学习前端课程。
-          技能：前端开发，移动APP开发，小程序开发
-        </p>
-      </article>
-
-
-      <article class="skills">
-        <h2>技能</h2>
-        <ol class="clearfix">
-          <li>
-            <h3>
-              HTML 5 &amp; CSS 3
-            </h3>
-            <div class="progressBar">
-              <div class="progress" style="width: 80%;"></div>
+            <div class="topNavBar noShow">
+                <a class="logo" href="#" alt="logo">
+                    <span class="rs">RS</span>
+                    <span class="card">card</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="#wrapper" class="actived">关于</a>
+                        </li>
+                        <li>
+                            <a href="#skills">技能</a>
+                        </li>
+                        <li>
+                            <a href="#portfolio">作品</a>
+                        </li>
+                        <li class="hasPwin">
+                            <a>博客</a>
+                            <div class="pwin">
+                                <ul>
+                                    <li><a href="">选型一</a></li>
+                                    <li><a href="">选型二</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a>日历</a>
+                        </li>
+                        <li>
+                            <a>联系方式</a>
+                        </li>
+                        <li class="hasPwin">
+                            <a>其他</a>
+                            <div class="pwin">
+                                <ul>
+                                    <li><a href="">选型一</a></li>
+                                    <li><a href="">选型二</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-          </li>
-          <li>
-            <h3>
-              JavaScript
-            </h3>
-            <div class="progressBar">
-              <div class="progress" style="width: 80%"></div>
-            </div>
-          </li>
-          <li>
-            <h3>
-              jQuery
-            </h3>
-            <div class="progressBar">
-              <div class="progress" style="width: 70%"></div>
-            </div>
-          </li>
-          <li>
-            <h3>
-              Vue.js
-            </h3>
-            <div class="progressBar">
-              <div class="progress" style="width: 70%"></div>
-            </div>
-          </li>
-          <li>
-            <h3>
-              React.js
-            </h3>
-            <div class="progressBar">
-              <div class="progress" style="width: 50%"></div>
-            </div>
-          </li>
-          <li>
-            <h3>
-              Node.js
-            </h3>
-            <div class="progressBar">
-              <div class="progress" style="width: 40%"></div>
-            </div>
-          </li>
-        </ol>
-      </article>
+        </header>
+
+        <main class="noShow">
+            <article class="personal-info">
+                <div class="content">
+                    <img src="images/avatar.jpg" alt="我的头像">
+                    <div class="info">
+                        <span class="tips">Hello</span>
+                        <h1>晏俊</h1>
+                        <p>前端开发工程师</p>
+                        <hr>
+                        <dl>
+                            <dt>年龄</dt>
+                            <dd>39</dd>
+                            <dt>所在城市</dt>
+                            <dd>上海</dd>
+                            <dt>邮箱</dt>
+                            <dd>eddie_key@163.com</dd>
+                            <dt>手机</dt>
+                            <dd>13917616917</dd>
+                        </dl>
+                    </div>
+                </div>
+
+                <footer>
+
+                </footer>
+            </article>
+
+            <article class="jieshao">
+                <a class="btn-download">下载简历（PDF）</a>
+                <p>
+                    晏俊， 前端工程师，现在在 饥人谷 学习前端课程。
+                    技能：前端开发，移动APP开发，小程序开发
+                </p>
+            </article>
 
 
-      <article class="portfolio">
-        <h2>作品集</h2>
-        <nav>
-          <ol class="portfolio-tab"">
+            <article id="skills" class="skills">
+                <h2>技能</h2>
+                <ol class="clearfix">
+                    <li>
+                        <h3>
+                            HTML 5 &amp; CSS 3
+                        </h3>
+                        <div class="progressBar">
+                            <div class="progress" style="width: 80%;"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>
+                            JavaScript
+                        </h3>
+                        <div class="progressBar">
+                            <div class="progress" style="width: 80%"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>
+                            jQuery
+                        </h3>
+                        <div class="progressBar">
+                            <div class="progress" style="width: 70%"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>
+                            Vue.js
+                        </h3>
+                        <div class="progressBar">
+                            <div class="progress" style="width: 70%"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>
+                            React.js
+                        </h3>
+                        <div class="progressBar">
+                            <div class="progress" style="width: 50%"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>
+                            Node.js
+                        </h3>
+                        <div class="progressBar">
+                            <div class="progress" style="width: 40%"></div>
+                        </div>
+                    </li>
+                </ol>
+            </article>
+
+
+            <article id="portfolio" class="portfolio">
+                <h2>作品集</h2>
+                <nav>
+                    <ol class="portfolio-tab"">
                         <li data-state=" state-1">所有</li>
-            <li data-state="state-2">框架</li>
-            <li data-state="state-3">原生JS&amp;CSS</li>
-          </ol>
+                        <li data-state="state-2">框架</li>
+                        <li data-state="state-3">原生JS&amp;CSS</li>
+                    </ol>
 
-          <div id="portfolioBar" class="bar state-1">
-            <div class="bar-inner"></div>
-          </div>
-        </nav>
+                    <div id="portfolioBar" class="bar state-1">
+                        <div class="bar-inner"></div>
+                    </div>
+                </nav>
 
-        <div id="works" class="works state-1">
-          <a href="javascript:;" rel="作品1">1</a>
-          <a href="javascript:;" rel="作品2">2</a>
-          <a href="javascript:;" rel="作品3">3</a>
-        </div>
+                <div id="works" class="works state-1">
+                    <a href="javascript:;" rel="作品1">1</a>
+                    <a href="javascript:;" rel="作品2">2</a>
+                    <a href="javascript:;" rel="作品3">3</a>
+                </div>
 
-      </article>
-    </main>
-  </div>
-
-  <img src="blogs/blog3img01.png" alt="">
-  <img src="blogs/blog3img03.png" alt="">
-  <img src="blogs/blog3img04.png" alt="">
-  <img src="blogs/blog3img02.png" alt="">
-  <img src="blogs/blog04.png" alt="">
-
-  <div id="mask">
-    <p id="loadmsg" style="margin:20px;font-size:12px;"></p>
-    <span>LOADING...</span>
-  </div>
+            </article>
+        </main>
+    </div>
 
 
-  <script>
-    var $ = (str, t) => t ? document.querySelector(str) : document.querySelectorAll(str);
-    var allImg = $("img");
-    var msgDom = $("#loadmsg", 1);
-    var imgCount = allImg.length;
-    var addLoadMsg = (str, color = "black") => msgDom.innerHTML += `<p style="color:${color}">${str}</p>`;
+
+    <div id="mask">
+        <p id="loadmsg" style="margin:20px;font-size:12px;"></p>
+        <span>LOADING...</span>
+    </div>
 
 
-    $("img").forEach(elem => {
-      elem.addEventListener("load", function (e) {
-        addLoadMsg(e.target.src + "  completed!");
-        imgCount--;
-        if (imgCount <= 1) {
-          setTimeout(function () {
-            document.body.style = "";
-            $("#mask", 1).style = "display:none;"
-          }, 1200)
+    <script>
+        var $ = (str, t) => t ? document.querySelector(str) : document.querySelectorAll(str);
+        var allImg = $("img");
+        var msgDom = $("#loadmsg", 1);
+        var imgCount = allImg.length;
+        var addLoadMsg = (str, color = "black") => msgDom.innerHTML += `<p style="color:${color}">${str}</p>`;
 
+
+
+        $("img").forEach(elem => {
+            elem.addEventListener("load", function (e) {
+                addLoadMsg(e.target.src + "  completed!");
+                imgCount--;
+                if (imgCount <= 1) {
+                    setTimeout(function () {
+                        document.body.style = "";
+                        $("#mask", 1).style = "display:none;";
+                        animiatiShow("main");
+                        animiatiShow(".topNavBar");
+                    }, 1200)
+                }
+            })
+            elem.addEventListener("error", function (e) {
+                addLoadMsg(e.target.src + "  error!", "red");
+                imgCount--;
+                if (imgCount <= 1) {
+                    setTimeout(function () {
+                        document.body.style = "";
+                        $("#mask", 1).style = "display:none;"
+                        animiatiShow("main");
+                        animiatiShow(".topNavBar");
+                    }, 1200)
+                }
+            })
+        });
+
+
+        function animiatiShow(emStr) {
+            $(emStr, 1).classList.remove("noShow");
         }
-      })
-      elem.addEventListener("error", function (e) {
-        addLoadMsg(e.target.src + "  error!", "red");
-        imgCount--;
-        if (imgCount <= 1) {
-          setTimeout(function () {
-            document.body.style = "";
-            $("#mask", 1).style = "display:none;"
-          }, 1200)
+
+        function isMS() {
+            if (!!window.ActiveXObject || "ActiveXObject" in window) {
+                return true;
+            } else {
+
+                if (/Edge/.test(navigator.userAgent)) {
+                    return true
+                }
+                return false;
+            }
         }
-      })
-    });
+
+        //置顶
+        window.scrollTo(0, 0)
 
 
-    function isMS() {
-      if (!!window.ActiveXObject || "ActiveXObject" in window) {
-        return true;
-      } else {
+        var topBar = document.querySelector(".topNavBar");
+        var temOldElem;
+        window.addEventListener("scroll", function (e) {
 
-        if (/Edge/.test(navigator.userAgent)) {
-          return true
+            var scrollTop
+            if (isMS()) {
+                scrollTop = document.body.scrollTop;
+            } else {
+                scrollTop = document.documentElement.scrollTop;;
+            }
+            if (scrollTop > 90) {
+                topBar.classList.add("graymask");
+
+            } else {
+                topBar.classList.remove("graymask");
+            }
+
+
+        });
+
+        //作品集切换
+        var tabInner = document.querySelector("#portfolioBar"),
+            workD = document.querySelector("#works");
+        Array.prototype.forEach.call(document.querySelectorAll(".portfolio-tab>li"), function (elem) {
+            elem.addEventListener("click", function (e) {
+                var state = e.target.hasAttribute('data-state') ? e.target.getAttribute("data-state") :
+                    "state-1";
+                tabInner.className = `bar ${state}`;
+                workD.className = `works ${state}`;
+            });
+        });
+
+
+        var curMenuActived = $(".topNavBar>nav>ul>li>a", 1);
+
+        //锚点与滚动位置关联
+        function createScrollAnchor() {
+            $(".topNavBar>nav>ul>li>a").forEach(function (elem) {
+
+                if (elem.getAttribute("href") && elem.getAttribute("href").indexOf("#") != -1) {
+                    elem.setAttribute("data-scrollTop", ($(elem.getAttribute("href"), 1).offsetTop + 100));
+
+                    //点击滚动锚点处事件加载
+                    elem.onclick = function (e) {
+                        e.preventDefault();
+                        //菜单按钮激活
+                        curMenuActived.classList.remove("actived");
+                        curMenuActived = e.currentTarget;
+                        curMenuActived.classList.add("actived");
+
+                        scrollAnimate(e.currentTarget.getAttribute("data-scrollTop"));
+                    }
+                }
+            })
         }
-        return false;
-      }
-    }
 
-    var topBar = document.querySelector(".topNavBar");
-    window.addEventListener("scroll", function (e) {
+        createScrollAnchor();
 
-      var scrollTop
-      if (isMS()) {
-        scrollTop = document.body.scrollTop;
-      } else {
-        scrollTop = document.documentElement.scrollTop;
-      }
-      if (scrollTop > 90) {
-        topBar.classList.add("graymask");
+        let setInterId = "";
+        //点击后滚动到对应位置点动画
+        function scrollAnimate(top) {
+            let n = 25; //滚动几次  可以理解为动画帧数
+            let dur = 300 / n; //多少秒动一次， 可以理解为动画每一帧的速度
 
-      } else {
-        topBar.classList.remove("graymask");
-      }
 
-    });
+            let curTop; //当前已经滚动点高度 也有用window.scrollY 但兼容不是很好
+            if (isMS()) {
+                curTop = document.body.scrollTop;
+            } else {
+                curTop = document.documentElement.scrollTop;;
+            }
+            let distance = (top - curTop) / n; //
+            let i = 0;
 
-    var tabInner = document.querySelector("#portfolioBar"),
-      workD = document.querySelector("#works");
-    Array.prototype.forEach.call(document.querySelectorAll(".portfolio-tab>li"), function (elem) {
-      elem.addEventListener("click", function (e) {
-        var state = e.target.hasAttribute('data-state') ? e.target.getAttribute("data-state") : "state-1";
-        tabInner.className = `bar ${state}`;
-        workD.className = `works ${state}`;
-      });
-    });
-  </script>
+            clearInterval(setInterId);
+            document.body.style="opacity:0.3";
+            setInterId = setInterval(() => {
+                i++;
+                if (i > n) {
+                    window.scrollTo(0, top);document.body.style="opacity:1";
+                    clearInterval(setInterId);
+                    return;
+                }
+                window.scrollTo(0, curTop + distance * i);
+                dur -= 100;
+            }, dur)
+        }
+    </script>
 </body>
 
 </html>

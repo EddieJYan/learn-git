@@ -7,7 +7,7 @@
 body {
 
     font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif;
-
+    transition: opacity 0.3s;
 }
 
 a {
@@ -53,9 +53,14 @@ li{
     top: 0;
     width: 100%;
     z-index: 2;
-
+    transition: top 1s;
 }
-
+.topNavBar.noShow {
+    top:-50px;
+}
+.noShow{
+    top:50px;
+}
 
 
 .topNavBar .logo {
@@ -121,10 +126,15 @@ li{
     bottom:0;
     height:3px;
     width:0%;
-    background-color: #e06567;
+    
     transition: 0.3s;
 }
+.topNavBar nav a.actived::after{
+    background-color: #e06567;
+    width:100%;
+}
 .topNavBar nav a:hover::after{
+    background-color: #ec9fa0;
     width:100%;
 }
 .topNavBar nav .hasPwin>a:hover::after{
@@ -132,6 +142,7 @@ li{
 }
 .topNavBar nav .hasPwin:hover .pwin{
     opacity: 1;
+    right:17px;
 }
 
 
@@ -151,7 +162,7 @@ li{
     transition: 0.5s;
     opacity: 0;
     position: absolute;
-    right:17px;
+    right:0px;
     top:30px;
     background-color:#fff;
     border-radius: 3px;
@@ -242,7 +253,11 @@ li{
 main {
     position: relative;
     top: -340px;
+    transition: top 1s;
 }
+main.noShow{
+    top:-290px;
+} 
 
 main>article {
     text-align: center;
@@ -537,7 +552,7 @@ main>article h2 {
 
 
 #mask {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     left: 0;
