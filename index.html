@@ -11,7 +11,7 @@
 </head>
 
 <body style="overflow: hidden;">
-    <div id="wrapper" class="wrapper">
+    <div id="wrapper" data-bbtn="to_wrapper" class="wrapper">
         <header class="page-header">
 
 
@@ -23,13 +23,13 @@
                 <nav>
                     <ul>
                         <li>
-                            <a href="#wrapper" class="actived">关于</a>
+                            <a id="to_wrapper" href="#wrapper" class="actived">关于</a>
                         </li>
                         <li>
-                            <a href="#skills">技能</a>
+                            <a id="to_skills" href="#skills">技能</a>
                         </li>
                         <li>
-                            <a href="#portfolio">作品</a>
+                            <a id="to_portfolio" href="#portfolio">作品</a>
                         </li>
                         <li class="hasPwin">
                             <a>博客</a>
@@ -96,7 +96,7 @@
             </article>
 
 
-            <article id="skills" class="skills">
+            <article id="skills" class="skills noShows" data-bbtn="to_skills">
                 <h2>技能</h2>
                 <ol class="clearfix">
                     <li>
@@ -104,7 +104,7 @@
                             HTML 5 &amp; CSS 3
                         </h3>
                         <div class="progressBar">
-                            <div class="progress" style="width: 80%;"></div>
+                            <div class="progress" data-score="90" style="width: 0%;"></div>
                         </div>
                     </li>
                     <li>
@@ -112,7 +112,7 @@
                             JavaScript
                         </h3>
                         <div class="progressBar">
-                            <div class="progress" style="width: 80%"></div>
+                            <div class="progress" data-score="40" style="width: 0%"></div>
                         </div>
                     </li>
                     <li>
@@ -120,7 +120,7 @@
                             jQuery
                         </h3>
                         <div class="progressBar">
-                            <div class="progress" style="width: 70%"></div>
+                            <div class="progress" data-score="70" style="width: 0%"></div>
                         </div>
                     </li>
                     <li>
@@ -128,7 +128,7 @@
                             Vue.js
                         </h3>
                         <div class="progressBar">
-                            <div class="progress" style="width: 70%"></div>
+                            <div class="progress" data-score="60" style="width: 0%"></div>
                         </div>
                     </li>
                     <li>
@@ -136,7 +136,7 @@
                             React.js
                         </h3>
                         <div class="progressBar">
-                            <div class="progress" style="width: 50%"></div>
+                            <div class="progress" data-score="50" style="width: 0%"></div>
                         </div>
                     </li>
                     <li>
@@ -144,14 +144,14 @@
                             Node.js
                         </h3>
                         <div class="progressBar">
-                            <div class="progress" style="width: 40%"></div>
+                            <div class="progress" data-score="80" style="width: 0%"></div>
                         </div>
                     </li>
                 </ol>
             </article>
 
 
-            <article id="portfolio" class="portfolio">
+            <article id="portfolio" class="portfolio" data-bbtn="to_portfolio">
                 <h2>作品集</h2>
                 <nav>
                     <ol class="portfolio-tab"">
@@ -237,27 +237,69 @@
         }
 
         //置顶
-        window.scrollTo(0, 0)
+       
 
+        var scrollPads = $("[data-bbtn]");
+        var i = 0;
 
         var topBar = document.querySelector(".topNavBar");
         var temOldElem;
+        var scrollTimeout = "";
         window.addEventListener("scroll", function (e) {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
 
-            var scrollTop
-            if (isMS()) {
-                scrollTop = document.body.scrollTop;
-            } else {
-                scrollTop = document.documentElement.scrollTop;;
-            }
-            if (scrollTop > 90) {
-                topBar.classList.add("graymask");
+                var scrollTop
+                if (isMS()) {
+                    scrollTop = document.body.scrollTop;
+                } else {
+                    scrollTop = document.documentElement.scrollTop;;
+                }
+                if (scrollTop > 90) {
+                    topBar.classList.add("graymask");
 
-            } else {
-                topBar.classList.remove("graymask");
-            }
+                } else {
+                    topBar.classList.remove("graymask");
+                }
 
 
+                if(scrollTop >= 400 ){
+                    scrollPads[1].classList.remove("noShows");
+                    $(".progress").forEach(function(elem){
+                        elem.style = `width:${elem.getAttribute("data-score")}%`
+                    })
+                    
+                }else{
+                    scrollPads[1].classList.add("noShows");
+                    $(".progress").forEach(function(elem){
+                        elem.style = `width:0%`
+                    })
+                }
+
+                i = scrollPads.length - 1;
+                //激活对应点按钮
+                while (i--) {
+                   
+                    if (scrollTop >= scrollPads[i + 1].offsetTop) {
+                        curMenuActived.classList.remove("actived");
+                        curMenuActived = $(`#${scrollPads[i+1].getAttribute("data-bbtn")}`,1)
+                        curMenuActived.classList.add("actived"); 
+                        //scrollPads[i+1].classList.remove("noShows");
+                        break;
+                    }
+                    if (scrollTop >= scrollPads[i].offsetTop && scrollTop < scrollPads[i + 1]
+                        .offsetTop) {
+                        curMenuActived.classList.remove("actived");
+                        curMenuActived = $(`#${scrollPads[i].getAttribute("data-bbtn")}`,1)
+                        curMenuActived.classList.add("actived"); 
+                        //scrollPads[i].classList.remove("noShows");
+                        break;
+                    } else {
+            
+                    }
+                }
+                clearTimeout(scrollTimeout);
+            }, 10)
         });
 
         //作品集切换
@@ -309,17 +351,18 @@
             if (isMS()) {
                 curTop = document.body.scrollTop;
             } else {
-                curTop = document.documentElement.scrollTop;;
+                curTop = document.documentElement.scrollTop;
             }
             let distance = (top - curTop) / n; //
             let i = 0;
 
             clearInterval(setInterId);
-            document.body.style="opacity:0.3";
+            document.body.style = "opacity:0.3";
             setInterId = setInterval(() => {
                 i++;
                 if (i > n) {
-                    window.scrollTo(0, top);document.body.style="opacity:1";
+                    window.scrollTo(0, top);
+                    document.body.style = "opacity:1";
                     clearInterval(setInterId);
                     return;
                 }
@@ -327,6 +370,7 @@
                 dur -= 100;
             }, dur)
         }
+
     </script>
 </body>
 
