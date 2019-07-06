@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ch-zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>仿造Jquery接口</title>
+    <style>
+    pre{
+        color:gray;
+        padding:10px;
+        background-color:#f0f0f0
+    }
+    .bold{
+        font-weight: bold;
+    }
+    body{
+        max-width: 1024px;
+        min-width:800px;
+        
+    }
+    </style>
+</head>
+<body>
+
+    <h1>仿造Jquery接口</h1>
+    <p>考虑到知识的拓展，我尝试使用Typescript完成这个小功能的封装</p>
+   
+    <p>首先是如同看产品需求一般，先看预设API的实现方法：</p>
+
+<pre>
+    window.jQuery = ???
+    window.$ = jQuery  
+
+    var $div = $('div')
+    $div.addClass('red') 
+    $div.setText('hi') 
+</pre>
+
+<p>从上面的代码分析结果：<br>
+1 有一个jQuery的全局方法，可以直接通过传递Emmet字符串获取node对象，并可以直接对其进行DOM操作<br>
+2 操作的API有两个 addClass //修改选取元素的类名 和 setText //修改元素的文字内容<br>
+由此可以先顶一个基本的结构</p>
+    
+<pre>
+        function jQuery(select:string) {
+            let curNode = document.querySelectorAll(select);
+            return {
+                addClass:  //对curNode增加类名
+                setText:   //对curNode设置文字
+            }
+        }
+
+</pre>
+<p>这是一个简单的创建模式，可以通过调用jQuery返回一个特定的对象，予以操作DOM</p>
+
+
+    <p class="bold">然后先开始做接口功能，并写上注释:</p>
+<pre>
+        function jQuery(select: string) {
+                let curNode: Array<Element> | null = document.querySelectorAll(select);
+                            
+                return {
+                    elemList: curNode.concat([]), //给返回的对象 赋予自己的元素
+                    /**
+                        * @method addClass 
+                        * @description 为制定元素增加类名
+                        * @param {string} className  类名
+                        * @returns {JQuery} 重新返回一个封装对象 用于链式操作
+                        */
+                    addClass: function (className: string):JQuery {
+                        this.elemList.forEach((item: Element) => {
+                            item.classList.add(className);
+                        })
+                    },          
+            
+                    /**
+                        * @method setText 
+                        * @description 设置类名
+                        * @param {string} text  需要修改的文字内容
+                        * @returns {JQuery} 重新返回一个封装对象 用于链式操作
+                        */
+                    setText: function (text: string):JQuery {
+                        this.elemList.forEach((item: Element) => {
+                            item.textContent = text;
+                        })
+                    }        
+                }
+            }
+
+</pre>
+<p>可以看到 注释的量不比代码少，所以相信很多新人都懒得写吧，但为了方便他人阅读代码，注释不能少。</p>
+
+
+
+<p class="bold">但这里还没有完，我想到如果模仿jquery怎么可以不用链式操作法呢？ 因此我在每个API功能完成后，返回自己，用于后续的操作。听起来很简单，但jquery传参只有字符串，而我返回的一般是元素列表，所以我准备把我操作的元素列表类型进行统一化，结果就改成了这样：</p>
+<pre>
+        
+        function jQuery(select: string | NodeListOf<Element> | Array<Element>) {
+            let curNode: Array<Element> = [];
+            let temNodeList: NodeListOf<Element> | null | Array<Element>;
+        
+            if ("string" === typeof (select)) {
+                temNodeList = document.querySelectorAll(select);
+            } else if (/nodelist/.test(Object.prototype.toString.call(select).toLowerCase())) {
+                temNodeList = select;
+            } else if (/array/.test(Object.prototype.toString.call(select).toLowerCase())) {
+                temNodeList = select;
+            }
+            else { temNodeList = null }
+        
+            //统一格式化
+            if (temNodeList) {
+                temNodeList.forEach((item: Element) => {
+                    curNode.push(item);
+                })
+            }
+        
+            return {
+                elemList: curNode.concat([]),
+                /**
+                    * @method addClass 
+                    * @description 为制定元素增加类名
+                    * @param {string} className  类名
+                    * @returns {JQuery} 重新返回一个封装对象 用于链式操作
+                    */
+                addClass: function (className: string):JQuery {
+                    this.elemList.forEach((item: Element) => {
+                        item.classList.add(className);
+                    })
+                    return jQuery(this.elemList);
+                },
+        
+                /**
+                    * @method setText 
+                    * @description 设置类名
+                    * @param {string} text  需要修改的文字内容
+                    * @returns {JQuery} 重新返回一个封装对象 用于链式操作
+                    */
+                setText: function (text: string):JQuery {
+                    this.elemList.forEach((item: Element) => {
+                        item.textContent = text;
+                    })
+                    return jQuery(this.elemList);
+                }        
+            }
+        }
+        
+                
+
+</pre>
+ <p>temNodeList 作为不同传参的统一收纳变量，然后再以Array&lt;Element&gt; 类型方式，转给curNode 这样一来便可以对不同的传参进行操作了。</p> 
+ <i>注： 其中nodelist和array 是可以通过instanceof判断的， 我只是用了比较古老的办法来做。</i>
+ 
+ <p class="bold">作为jquery还有一个重要的功能是find， 所以我模仿了getChildElements接口，用于获取之前元素列表下的其他子元素：</p>  
+<pre>
+        
+        function jQuery(select: string | NodeListOf<Element> | Array<Element>) {
+            let curNode: Array<Element> = [];
+            let temNodeList: NodeListOf<Element> | null | Array<Element>;
+        
+            if ("string" === typeof (select)) {
+                temNodeList = document.querySelectorAll(select);
+            } else if (/nodelist/.test(Object.prototype.toString.call(select).toLowerCase())) {
+                temNodeList = select;
+            } else if (/array/.test(Object.prototype.toString.call(select).toLowerCase())) {
+                temNodeList = select;
+            }
+            else { temNodeList = null }
+        
+            //统一格式化
+            if (temNodeList) {
+                temNodeList.forEach((item: Element) => {
+                    curNode.push(item);
+                })
+            }
+        
+            return {
+                elemList: curNode.concat([]),
+                /**
+                    * @method addClass 
+                    * @description 为制定元素增加类名
+                    * @param {string} className  类名
+                    * @returns {JQuery} 重新返回一个封装对象 用于链式操作
+                    */
+                addClass: function (className: string):JQuery {
+                    this.elemList.forEach((item: Element) => {
+                        item.classList.add(className);
+                    })
+                    return jQuery(this.elemList);
+                },
+        
+                /**
+                    * @method getChildElements 
+                    * @description 寻找制定元素内部的节点元素
+                    * @param {string} str  选择器字符串
+                    * @returns {JQuery} 将找到的元素重新封装对象 用于链式操作
+                    */
+                getChildElements: function (str: string):JQuery {
+                    let result: Array<Element> = [];
+                    this.elemList.forEach((item: Element) => {
+                        if (item.nodeType === 1) {
+                            item.querySelectorAll(str).forEach((item: Element) => {
+                                result.push(item)
+                            })
+                        }
+                    })            
+                    return jQuery(result);
+                },
+        
+                /**
+                    * @method setText 
+                    * @description 设置类名
+                    * @param {string} text  需要修改的文字内容
+                    * @returns {JQuery} 重新返回一个封装对象 用于链式操作
+                    */
+                setText: function (text: string):JQuery {
+                    this.elemList.forEach((item: Element) => {
+                        item.textContent = text;
+                    })
+                    return jQuery(this.elemList);
+                }        
+            }
+        }
+                       
+
+</pre>
+<p class="bold">这样一来基本大功告成，算是以此小小的尝试，最重要的还是以typescript的形式来完成</p>
+
+
+
+</body>
+</html>

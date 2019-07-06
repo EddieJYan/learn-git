@@ -28,4 +28,7 @@
 # or 另一种方法
 # git update-index --assume-unchanged PATH                  //在PATH处输入要忽略的文件
 
+.cache/
+dist/
 CNAME.*   
+.vscode/

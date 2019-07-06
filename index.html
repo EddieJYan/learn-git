@@ -95,6 +95,7 @@
                 </p>
             </article>
 
+            <article id="chaojilaji"></article>
 
             <article id="skills" class="skills noShows" data-bbtn="to_skills">
                 <h2>技能</h2>
@@ -191,6 +192,12 @@
         var addLoadMsg = (str, color = "black") => msgDom.innerHTML += `<p style="color:${color}">${str}</p>`;
 
 
+        function closeLoad() {
+            document.body.style = "";
+            $("#mask", 1).style = "display:none;";
+            animiatiShow("main");
+            animiatiShow(".topNavBar");
+        }
 
         $("img").forEach(elem => {
             elem.addEventListener("load", function (e) {
@@ -198,10 +205,7 @@
                 imgCount--;
                 if (imgCount <= 1) {
                     setTimeout(function () {
-                        document.body.style = "";
-                        $("#mask", 1).style = "display:none;";
-                        animiatiShow("main");
-                        animiatiShow(".topNavBar");
+                        closeLoad();
                     }, 1200)
                 }
             })
@@ -210,14 +214,19 @@
                 imgCount--;
                 if (imgCount <= 1) {
                     setTimeout(function () {
-                        document.body.style = "";
-                        $("#mask", 1).style = "display:none;"
-                        animiatiShow("main");
-                        animiatiShow(".topNavBar");
+                        closeLoad();
                     }, 1200)
                 }
             })
         });
+
+        //超时显示
+        setTimeout(function () {
+            if( !($("#mask", 1).hasAttribute("style"))){
+                closeLoad();
+            }            
+        }, 4000);
+
 
 
         function animiatiShow(emStr) {
@@ -237,7 +246,7 @@
         }
 
         //置顶
-       
+
 
         var scrollPads = $("[data-bbtn]");
         var i = 0;
@@ -263,15 +272,15 @@
                 }
 
 
-                if(scrollTop >= 400 ){
+                if (scrollTop >= 400) {
                     scrollPads[1].classList.remove("noShows");
-                    $(".progress").forEach(function(elem){
+                    $(".progress").forEach(function (elem) {
                         elem.style = `width:${elem.getAttribute("data-score")}%`
                     })
-                    
-                }else{
+
+                } else {
                     scrollPads[1].classList.add("noShows");
-                    $(".progress").forEach(function(elem){
+                    $(".progress").forEach(function (elem) {
                         elem.style = `width:0%`
                     })
                 }
@@ -279,23 +288,23 @@
                 i = scrollPads.length - 1;
                 //激活对应点按钮
                 while (i--) {
-                   
+
                     if (scrollTop >= scrollPads[i + 1].offsetTop) {
                         curMenuActived.classList.remove("actived");
-                        curMenuActived = $(`#${scrollPads[i+1].getAttribute("data-bbtn")}`,1)
-                        curMenuActived.classList.add("actived"); 
+                        curMenuActived = $(`#${scrollPads[i+1].getAttribute("data-bbtn")}`, 1)
+                        curMenuActived.classList.add("actived");
                         //scrollPads[i+1].classList.remove("noShows");
                         break;
                     }
                     if (scrollTop >= scrollPads[i].offsetTop && scrollTop < scrollPads[i + 1]
                         .offsetTop) {
                         curMenuActived.classList.remove("actived");
-                        curMenuActived = $(`#${scrollPads[i].getAttribute("data-bbtn")}`,1)
-                        curMenuActived.classList.add("actived"); 
+                        curMenuActived = $(`#${scrollPads[i].getAttribute("data-bbtn")}`, 1)
+                        curMenuActived.classList.add("actived");
                         //scrollPads[i].classList.remove("noShows");
                         break;
                     } else {
-            
+
                     }
                 }
                 clearTimeout(scrollTimeout);
@@ -371,6 +380,32 @@
             }, dur)
         }
 
+
+        setTimeout(() => {
+            console.time("控制台计时器");
+            let a = [];
+            let dom = document.querySelector("#chaojilaji")
+            for (var i = 0; i < 5000; i++) {
+                a.push(`<p>hello ha${i}</p>`);
+            }
+            dom.innerHTML = a.join("");
+            console.timeEnd("控制台计时器");
+        }, 3000)
+
+
+        function frag() {
+            console.time("控制台计时器");
+            let a = [],
+                frag = document.createDocumentFragment();
+            let hr;
+            for (var i = 0; i < 5000; i++) {
+                hr = document.createElement("p");
+                hr.textContent = "hello ha" + i;
+                frag.appendChild(hr);
+            }
+            document.querySelector("#chaojilaji").appendChild(frag);
+            console.timeEnd("控制台计时器");
+        }
     </script>
 </body>
 
