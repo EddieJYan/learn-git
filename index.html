@@ -381,31 +381,6 @@
         }
 
 
-        setTimeout(() => {
-            console.time("控制台计时器");
-            let a = [];
-            let dom = document.querySelector("#chaojilaji")
-            for (var i = 0; i < 5000; i++) {
-                a.push(`<p>hello ha${i}</p>`);
-            }
-            dom.innerHTML = a.join("");
-            console.timeEnd("控制台计时器");
-        }, 3000)
-
-
-        function frag() {
-            console.time("控制台计时器");
-            let a = [],
-                frag = document.createDocumentFragment();
-            let hr;
-            for (var i = 0; i < 5000; i++) {
-                hr = document.createElement("p");
-                hr.textContent = "hello ha" + i;
-                frag.appendChild(hr);
-            }
-            document.querySelector("#chaojilaji").appendChild(frag);
-            console.timeEnd("控制台计时器");
-        }
     </script>
 </body>
 
