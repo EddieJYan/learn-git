@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+</head>
+<style>
+*{
+  box-sizing:border-box;
+}
+
+#slider{
+  width:200px;
+  height:100px;  
+  position:relative;
+  overflow:hidden;
+
+}
+
+#mvbox{
+  position:absolute;
+  left:0;
+  top:0;
+  font-size:0;
+  height:100%;
+
+}
+
+#mvbox span{
+  display:inline-block;
+  width:200px;
+  height:100px;
+  font-size:12px;
+  padding:10px 10px
+}
+
+#mvbox span[data-idx='1']{
+  background:red;
+}
+#mvbox span[data-idx='2']{
+  background:green;
+}
+#mvbox span[data-idx='3']{
+  background:yellow;
+}
+#mvbox span[data-idx='4']{
+  background:blue;
+}
+#mvbox span[data-idx='5']{
+  background:orange;
+}
+
+#mvbox.move-middle{
+  
+  left:-200px;
+}
+
+
+#mvbox.move-left{
+  transition:1s;
+  left:-400px;
+}
+
+#mvbox.move-right{
+  transition:1s;
+  left:0;
+}
+
+
+
+
+
+
+
+</style>
+<body>
+
+  <div id="slider">
+    <div id="mvbox">
+      <span data-idx="1">1</span>
+      <span data-idx="2">2</span>
+      <span data-idx="3">3</span>
+      <span data-idx="4">4</span>
+      <span data-idx="5">5</span>
+    </div>
+  </div>
+  
+  <div id="btns">
+    <button class="pev">pev</button>
+    <button class="next">next</button>    
+  </div>
+  
+  <script>
+(function(){
+  let $ = str => document.querySelectorAll(str);
+  let mvBox = $("#mvbox")[0];
+  let items = $("#mvbox>span");
+  let currentIdx = 1;
+  
+  this.createSlider = function(){
+    return {
+       moveEnd:true,
+       init:function(){
+         mvBox.style = `width:${$("#slider")[0].clientWidth * 3}px`
+                 
+         mvBox.className = "move-middle";   
+         
+         mvBox.insertBefore( items[items.length-1].cloneNode(true) ,mvBox.childNodes[0]);
+         mvBox.appendChild( items[0].cloneNode(true));
+         
+         mvBox.addEventListener("transitionend", e=>{
+           this.moveEnd = true;             
+           this.showLoc();   
+           mvBox.className = "move-middle";   
+         });
+         
+         this.showLoc();
+       },
+       mvLeft:function(){
+         this.moveEnd =false;
+         mvBox.className = "move-left";
+         currentIdx++;       
+       },
+       mvRight:function(){ 
+         this.moveEnd =false;
+         mvBox.className = "move-right";
+         currentIdx--;           
+       },
+        
+       showLoc:function(){
+         let tem = $("#mvbox>span");
+         if(currentIdx >= tem.length - 1){
+             currentIdx = 1
+         }
+         if(currentIdx <= 0){
+             currentIdx = tem.length -2
+         }
+
+         tem.forEach(item=>{
+           item.style = "display:none"
+         })         
+          
+         tem[currentIdx-1].style= "";
+         tem[currentIdx].style= "";
+         tem[currentIdx+1].style= "";          
+         
+       }
+    }     
+  }  
+  
+  
+})(window);
+
+
+
+let slider = createSlider();
+slider.init();
+
+document.querySelectorAll("#btns >button").forEach(function(item){
+  item.addEventListener("click",function(e){
+     if(slider.moveEnd)  {       
+       if("pev" === e.currentTarget.className){
+          slider.mvRight()
+       }else{
+          slider.mvLeft()
+       }  
+    }     
+  })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>
