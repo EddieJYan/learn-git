@@ -11,58 +11,157 @@
             box-sizing: border-box;
         }
 
+        body {
+            color: #444444;
+            font-size: 13px;
+            background: #f2f2f2;
+            font-family: Arial, Helvetica, sans-serif;
+text-align:center;
+        }
+
+        .wrap {
+            margin: 0 auto;
+            box-shadow: 0 0 3px #AAAAAA;
+            border: 1px solid white;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
         #slide-box {
             position: relative;
             width: 900px;
-            height: 300px;
-            background-color: #f2f2f2;
-            overflow: hidden;
+            height: 500px;
+            background-color: #fff;
+            overflow: hidden;            
         }
 
         .slide-window {
             position: absolute;
-            /* display: flex;
-            align-items: flex-start;
-            justify-content: space-around; */
-            height: 100%;    
+            height: 100%;
             left: 0;
             top: 0;
             word-wrap: normal;
             white-space: nowrap;
-            font-size: 0;            
+            font-size: 0;
             transition: 1s;
         }
 
         .slide-window>a {
-            border: 15px solid black;
+       
             display: inline-block;
             height: 100%;
             text-align: center;
             color: gray;
             font-size: 14px;
-            background-color: #f0f0f0;
+   
+        }
 
+        .btns {
+            font-size: 0;
+            height: 50px;
+            text-align: center;
+            background: rgb(255, 255, 255);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(241, 241, 241, 1) 8%, rgba(241, 241, 241, 1) 9%, rgba(225, 225, 225, 1) 17%, rgba(225, 225, 225, 1) 17%, rgba(225, 225, 225, 1) 18%, rgba(246, 246, 246, 1) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .btns::before {
+            content:"";
+            width:100%;
+            height:10px;
+            top:-10px;
+            left:0px;
+            box-shadow: 0px 3px 10px gray;
+            position: absolute;
+        }
+
+        .btns button {
+            display: inline-block;
+            height: 49px;
+            position: relative;
+            color: gray;
+            font-size: 12px;
+            border: none;
+            border-left: 1px solid white;
+            box-shadow: -1px 0px 1px #aaaaaa;
+            background-color: transparent;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .btns button:last-child {
+            border-right: 1px solid #aaaaaa;
+        }
+
+        .btns button:after {
+            content: "";
+            width: 0;
+            height: 0;
+            position: absolute;
+            border: 5px solid transparent;
+            border-top-color: rgb(158, 158, 158);
+            top: 3px;
+            left: calc(50% - 5px);
+        }
+
+        .btns button.actived {
+            color: black;
+        }
+
+        .btns button.actived:after {
+            border-top-color: red;
         }
 
         .page-1 {
             transform: translateX(0);
         }
+
+        .slide-window a:nth-of-type(1){
+            background-image:url('http://pic1.win4000.com/wallpaper/f/5811961a30036.jpg');            
+        }
+        .slide-window a:nth-of-type(2){
+            background-image:url('http://pic1.win4000.com/wallpaper/0/581195670cf46.jpg');            
+        }
+        .slide-window a:nth-of-type(3){
+            background-image:url('https://b-ssl.duitang.com/uploads/item/201803/26/20180326114142_5eiCv.jpeg');            
+        }
+        .slide-window a:nth-of-type(4){
+            background-image:url('http://attachments.gfan.net.cn/forum/attachments2/day_120220/120220212752b5f7048dc92007.jpg');            
+        }
+        .slide-window a:nth-of-type(5){
+            background-image:url('http://www.51pptmoban.com/d/file/2014/03/30/b5ab5828f8b6f284e6201c14c0454a09.jpg');            
+        }
+
+        
+        .slide-window a{
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
     </style>
 </head>
 
 <body>
+    <div class="wrap">
+        <div id="slide-box">
+            <div class="slide-window page-1">
+                <a href="#"></a>
+                <a href="#"></a>
+                <a href="#"></a>
+                <a href="#"></a>
+                <a href="#"></a>
+            </div>
+        </div>
 
-    <div id="slide-box">
-        <div class="slide-window page-2">
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
+        <div class="btns">
+            <button id="page-1" class="actived">壹</button>
+            <button id="page-2">贰</button>
+            <button id="page-3">叁</button>
+            <button id="page-4">肆</button>
+            <button id="page-5">伍</button>
         </div>
     </div>
 
-<button id="page-1">第一张</button>
-<button id="page-2">第二张</button>
-<button id="page-3">第三张</button>
 
     <script>
         var iw = document.querySelector("#slide-box").clientWidth;
@@ -83,10 +182,11 @@
         newStyle.innerHTML = str;
         document.body.appendChild(newStyle);
 
-        document.querySelectorAll("button").forEach((elem)=>{
-            elem.onclick = function(e){
+        document.querySelectorAll("button").forEach((elem) => {
+            elem.onclick = function (e) {
+                document.querySelector("button[class='actived']").classList.remove("actived");
                 slideWin.className = `slide-window ${e.target.id}`;
-                
+                e.currentTarget.classList.add("actived");
             }
         })
     </script>
