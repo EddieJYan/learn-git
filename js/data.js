@@ -1,7 +1,7 @@
-(function(_w){
+(function (_w) {
     _w["gameData"] = {
-        "customer":{
-           
+        "customer": {
+
         }
     }
     document.documentElement.classList.toggle("show")

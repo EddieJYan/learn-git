@@ -1,0 +1,120 @@
+.wrap {
+    margin: 0 auto;
+    box-shadow: 0 0 3px #AAAAAA;
+    border: 1px solid white;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+#slide-box {
+    position: relative;
+    width: 600px;
+    height: 300px;
+    background-color: #fff;
+    overflow: hidden;            
+}
+
+.slide-window {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    word-wrap: normal;
+    white-space: nowrap;
+    font-size: 0;
+    transition: 1s;
+}
+
+.slide-window>a {
+
+    display: inline-block;
+    height: 100%;
+    text-align: center;
+    color: gray;
+    font-size: 14px;
+
+}
+
+.btns {
+    font-size: 0;
+    height: 50px;
+    text-align: center;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(241, 241, 241, 1) 8%, rgba(241, 241, 241, 1) 9%, rgba(225, 225, 225, 1) 17%, rgba(225, 225, 225, 1) 17%, rgba(225, 225, 225, 1) 18%, rgba(246, 246, 246, 1) 100%);
+    position: relative;
+    overflow: hidden;
+}
+.btns::before {
+    content:"";
+    width:100%;
+    height:10px;
+    top:-10px;
+    left:0px;
+    box-shadow: 0px 3px 10px gray;
+    position: absolute;
+}
+
+.btns button {
+    display: inline-block;
+    height: 49px;
+    position: relative;
+    color: gray;
+    font-size: 12px;
+    border: none;
+    border-left: 1px solid white;
+    box-shadow: -1px 0px 1px #aaaaaa;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+}
+
+.btns button:last-child {
+    border-right: 1px solid #aaaaaa;
+}
+
+.btns button:after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    border: 5px solid transparent;
+    border-top-color: rgb(158, 158, 158);
+    top: 3px;
+    left: calc(50% - 5px);
+}
+
+.btns button.actived {
+    color: black;
+}
+
+.btns button.actived:after {
+    border-top-color: red;
+}
+
+.page-1 {
+    transform: translateX(0);
+}
+
+.slide-window a:nth-of-type(1){
+    background-image:url('/portfolio/slide01.jpg');            
+}
+.slide-window a:nth-of-type(2){
+    background-image:url('/portfolio/slide02.jpg');            
+}
+.slide-window a:nth-of-type(3){
+    background-image:url('/portfolio/slide03.jpg');            
+}
+.slide-window a:nth-of-type(4){
+    background-image:url('/portfolio/slide04.jpg');            
+}
+.slide-window a:nth-of-type(5){
+    background-image:url('/portfolio/slide05.jpg');            
+}
+
+
+.slide-window a{
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color:black;
+}
