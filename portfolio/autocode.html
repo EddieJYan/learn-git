@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>JS Bin</title>
+    <style id="playStyle">
+        * {
+            margin: 0px;
+            padding: 0px;
+            transition: 0.5s;
+            color: gray;
+            font-family: Arial, Helvetica, sans-serif;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <pre id="preCode"></pre>
+    <div id="show"></div>
+    <script>
+        var cssstr = `pre{  
+  background-color:black;
+  color:white;
+  padding:10px;  
+  font-size:14px; 
+  position:absolute;
+  width:50%;
+  height:100%;
+  left:0;
+  top:0;
+  overflow:hidden;
+}
+#show{
+  border:1px solid black;
+  position:absolute;
+  width:50%;
+  height:100%;
+  right:0;
+  top:0;
+  overflow:hidden;
+}
+`;
+        var htmlstr = `<div>
+  <h1>姓名：晏俊</h1>  
+  <h2>特长</h2>
+  <ul>
+    <li>1.js</li>
+    <li>2.html</li>
+    <li>3.css</li>
+  </ul>
+</div>
+`
+        var ncss = `
+h1,h2,ul{
+  padding:5px;
+}
+h1{
+  color:black;
+}
+h2{
+  text-align:center;
+}
+li{
+  line-height:1.5em;
+}
+`
+
+
+        function cssCreate(str) {
+            return new Promise(function (next, error) {
+                var i = 0;
+                var baba = setInterval(() => {
+                    if (i >= str.length - 1) {
+                        clearInterval(baba);
+                        setTimeout(() => {
+                            next(htmlstr);
+                        }, 1200);
+                    }
+                    let temp = str.substring(0, i);
+                    preCode.innerHTML = highLight(temp, "style");
+
+                    playStyle.innerHTML += str[i];
+
+                    i++;
+                }, 20);
+            })
+        }
+
+        cssCreate(cssstr)
+            .then(addText)
+            .then(addHTML)
+            .then(addText)
+            .then(cssCreate)
+            .catch(function (error) {
+                alert(error)
+            })
+
+        function addHTML(text) {
+            return new Promise(function (next, error) {
+
+                var i = 0;
+                var baba = setInterval(() => {
+                    if (i >= text.length - 1) {
+                        clearInterval(baba);
+                        next(ncss);
+                    }
+
+                    preCode.textContent = text.substring(0, i);
+                    show.innerHTML = text.substring(0, i);
+                    i++;
+                }, 20);
+            })
+        }
+
+        function addText(nstr) {
+            return new Promise(function (next, error) {
+                var i = 0;
+                var text = "重新开始另一段代码。";
+                var ntx = nstr;
+                var baba = setInterval(() => {
+                    if (i >= text.length - 1) {
+                        clearInterval(baba);
+                        setTimeout(() => {
+                            next(ntx);
+                        }, 1200);
+                    }
+                    preCode.innerHTML = text.substring(0, i);
+                    i++;
+                }, 20);
+            })
+        }
+
+        function highLight(str, type) {
+            let istr = str;
+            switch (type) {
+                case "style":
+                    for (idx in keyStyle) {
+
+                        istr = istr.replace(new RegExp("" + idx, 'g'), keyStyle[idx]) //HTML名选择器高亮
+                    }
+                    break;
+
+            }
+            return istr;
+        }
+
+        var keyStyle = {
+            "pre": "<span style='color:rgb(27, 201, 231)'>pre</span>",
+            "h1": "<span style='color:rgb(27, 201, 231)'>h1</span>",
+            "h2": "<span style='color:rgb(27, 201, 231)'>h2</span>",
+            "ul": "<span style='color:rgb(27, 201, 231)'>ul</span>",
+            "li{": "<span style='color:rgb(27, 201, 231)'>li</span>{",
+            "line-height": "<span style='color:yellow'>line-height</span>",
+            "background-color": "<span style='color:yellow'>background-color</span>",
+            " color": "<span style='color:yellow'> color</span>",
+            "text-align": "<span style='color:yellow'>text-align</span>",
+            " padding": "<span style='color:yellow'> padding</span>",
+            "font-size": "<span style='color:yellow'>font-size</span>",
+            "border": "<span style='color:yellow'>border</span>",
+            "position": "<span style='color:yellow'>position</span>",
+            "width": "<span style='color:yellow'>width</span>",
+            "height": "<span style='color:yellow'>height</span>",
+            "top": "<span style='color:yellow'>top</span>",
+            "right": "<span style='color:yellow'>right</span>",
+            "left": "<span style='color:yellow'>left</span>",
+            "overflow": "<span style='color:yellow'>overflow</span>"
+
+        }
+    </script>
+</body>
+
+</html>

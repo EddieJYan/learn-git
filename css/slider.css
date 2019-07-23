@@ -66,6 +66,7 @@
     background-color: transparent;
     outline: none;
     cursor: pointer;
+
 }
 
 .btns button:last-child {
@@ -79,6 +80,7 @@
     position: absolute;
     border: 5px solid transparent;
     border-top-color: rgb(158, 158, 158);
+
     top: 3px;
     left: calc(50% - 5px);
 }
