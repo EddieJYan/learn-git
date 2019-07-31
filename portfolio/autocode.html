@@ -66,6 +66,12 @@ li{
   line-height:1.5em;
 }
 `
+var list = {0:11,1:22,2:33,length:3};
+console.log(Object.prototype.toString.call(list))
+list.__proto__ = Array.prototype;
+var dada = [];
+console.log(Object.prototype.toString.call(dada))
+
 
 
         function cssCreate(str) {
